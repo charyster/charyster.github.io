@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 240" role="img" aria-labelledby="title desc">
+  <title id="title">Control Flota</title>
+  <desc id="desc">Logotipo Control Flota con monograma CF y red hexagonal</desc>
+  <defs>
+    <linearGradient id="network" x1="32" y1="58" x2="488" y2="154" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07395c"/>
+      <stop offset="0.48" stop-color="#238fa4"/>
+      <stop offset="1" stop-color="#74b96d"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#0b4664" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <rect width="520" height="240" fill="transparent"/>
+
+  <g fill="none" stroke="url(#network)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)">
+    <path d="M42 91 75 72 108 91 108 129 75 148 42 129Z"/>
+    <path d="M108 91 141 72 174 91 174 129 141 148 108 129Z"/>
+    <path d="M346 91 379 72 412 91 412 129 379 148 346 129Z"/>
+    <path d="M412 91 445 72 478 91 478 129 445 148 412 129Z"/>
+    <path d="M174 110H204"/>
+    <path d="M316 110H346"/>
+  </g>
+
+  <g fill="url(#network)" filter="url(#shadow)">
+    <circle cx="42" cy="91" r="9"/>
+    <circle cx="75" cy="72" r="9"/>
+    <circle cx="108" cy="91" r="9"/>
+    <circle cx="108" cy="129" r="9"/>
+    <circle cx="75" cy="148" r="9"/>
+    <circle cx="42" cy="129" r="9"/>
+    <circle cx="141" cy="72" r="9"/>
+    <circle cx="174" cy="91" r="9"/>
+    <circle cx="174" cy="129" r="9"/>
+    <circle cx="141" cy="148" r="9"/>
+    <circle cx="346" cy="91" r="9"/>
+    <circle cx="379" cy="72" r="9"/>
+    <circle cx="412" cy="91" r="9"/>
+    <circle cx="412" cy="129" r="9"/>
+    <circle cx="379" cy="148" r="9"/>
+    <circle cx="346" cy="129" r="9"/>
+    <circle cx="445" cy="72" r="9"/>
+    <circle cx="478" cy="91" r="9"/>
+    <circle cx="478" cy="129" r="9"/>
+    <circle cx="445" cy="148" r="9"/>
+  </g>
+
+  <g filter="url(#shadow)">
+    <path d="M260 49 318 83 318 150 260 184 202 150 202 83Z" fill="#f8fcfb" stroke="url(#network)" stroke-width="7"/>
+    <path d="M260 29 273 75 318 61 286 96 330 116 284 126 298 172 260 139 222 172 236 126 190 116 234 96 202 61 247 75Z" fill="none" stroke="#0f8fa3" stroke-width="5" stroke-linejoin="round"/>
+    <text x="260" y="132" text-anchor="middle" fill="#0b4664" font-family="Inter, Arial, sans-serif" font-size="54" font-weight="900" letter-spacing="-2">CF</text>
+  </g>
+
+  <text x="260" y="222" text-anchor="middle" fill="#0b4664" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="900" letter-spacing="2.5">CONTROL FLOTA</text>
+</svg>

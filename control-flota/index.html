@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#07191d">
     <title>Control Flota — Gestión de reparto</title>
     <meta name="description" content="Control Flota: gestión de repartidores, pedidos, jornadas y localización con base de datos configurable.">
-    <link rel="icon" type="image/png" href="../assets/control-flota-logo.png">
+    <link rel="icon" type="image/svg+xml" href="../assets/control-flota-logo.svg">
     <style>
       :root { color-scheme: dark; --bg:#061216; --panel:rgba(9,31,36,.76); --line:rgba(57,197,183,.25); --hot:#42d1bd; --blue:#1b8ba7; --amber:#ffd36a; --text:#f1f7f7; --muted:#9eb1b4; }
       * { box-sizing:border-box; }
@@ -52,11 +52,11 @@
     </style>
   </head>
   <body>
-    <header><nav class="shell"><a class="brand" href="../"><img src="../assets/control-flota-logo.png" alt=""><span>Control Flota</span></a><a class="button" href="../">Volver</a></nav></header>
+    <header><nav class="shell"><a class="brand" href="../"><img src="../assets/control-flota-logo.svg" alt=""><span>Control Flota</span></a><a class="button" href="../">Volver</a></nav></header>
     <main>
       <section class="hero shell">
         <div><span class="eyebrow">Reparto · Equipo · Localización</span><div class="status">PRODUCTO + BASE DE DATOS · REQUIERE ACTIVACIÓN</div><h1>Tu reparto, bajo <span>control.</span></h1><p>Una solución para administrar empleados, jornadas, pedidos y ubicación de repartidores desde una interfaz clara y adaptada al móvil.</p><div class="features"><div><strong>Pedidos</strong><span>Alta y seguimiento</span></div><div><strong>Empleados</strong><span>Jornadas y estados</span></div><div><strong>Mapa</strong><span>Localización del equipo</span></div><div><strong>Firebase</strong><span>Base de datos propia</span></div></div></div>
-        <div class="hero-logo"><img src="../assets/control-flota-logo.png" alt="Logotipo de Control Flota"></div>
+        <div class="hero-logo"><img src="../assets/control-flota-logo.svg" alt="Logotipo de Control Flota"></div>
       </section>
       <aside class="notice shell"><strong>Configuración necesaria</strong><p>El producto no está activo por defecto. Para utilizarlo hay que crear o conectar un proyecto Firebase, configurar sus credenciales y activar la base de datos del cliente.</p></aside>
       <section class="gallery-section" id="capturas"><div class="shell"><div class="section-head"><div><span class="eyebrow">Vista previa</span><h2>Administrador y empleado</h2></div><p>Cuatro vistas del panel de administración y una vista del empleado. Pulsa una captura para ampliarla.</p></div><div class="gallery">
@@ -69,6 +69,6 @@
     </main>
     <dialog id="previewDialog" aria-label="Captura ampliada"><button type="button" aria-label="Cerrar">×</button><img src="" alt=""></dialog>
     <footer class="shell"><span>© 2026 Charyster · Control Flota</span><span>Producto configurable con base de datos propia</span></footer>
-    <script>const dialog=document.querySelector("#previewDialog"),preview=dialog.querySelector("img");document.querySelectorAll(".shot").forEach(shot=>shot.addEventListener("click",()=>{const image=shot.querySelector("img");preview.src=image.src;preview.alt=shot.dataset.title;dialog.showModal()}));dialog.querySelector("button").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close()});</script>
+    <script>history.scrollRestoration="manual";window.addEventListener("pageshow",()=>window.scrollTo(0,0));const dialog=document.querySelector("#previewDialog"),preview=dialog.querySelector("img");document.querySelectorAll(".shot").forEach(shot=>shot.addEventListener("click",()=>{const image=shot.querySelector("img");preview.src=image.src;preview.alt=shot.dataset.title;dialog.showModal()}));dialog.querySelector("button").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close()});</script>
   </body>
 </html>
