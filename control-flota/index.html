@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#07191d">
+    <title>Control Flota — Gestión de reparto</title>
+    <meta name="description" content="Control Flota: gestión de repartidores, pedidos, jornadas y localización con base de datos configurable.">
+    <link rel="icon" type="image/png" href="../assets/control-flota-logo.png">
+    <style>
+      :root { color-scheme: dark; --bg:#061216; --panel:rgba(9,31,36,.76); --line:rgba(57,197,183,.25); --hot:#42d1bd; --blue:#1b8ba7; --amber:#ffd36a; --text:#f1f7f7; --muted:#9eb1b4; }
+      * { box-sizing:border-box; }
+      html { scroll-behavior:smooth; }
+      body { margin:0; min-height:100vh; color:var(--text); background:radial-gradient(circle at 10% 8%,rgba(66,209,189,.15),transparent 30rem),radial-gradient(circle at 92% 18%,rgba(27,139,167,.13),transparent 32rem),linear-gradient(135deg,#041013,#081a1e 52%,#061115); font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.55; }
+      body::before { content:""; position:fixed; inset:0; z-index:-1; opacity:.2; background-image:linear-gradient(rgba(66,209,189,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(66,209,189,.08) 1px,transparent 1px); background-size:58px 58px; mask-image:linear-gradient(to bottom,black,transparent 84%); }
+      a { color:inherit; } img { display:block; max-width:100%; }
+      .shell { width:min(1180px,calc(100% - 36px)); margin-inline:auto; }
+      header { position:sticky; top:0; z-index:20; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(4,15,18,.8); backdrop-filter:blur(18px); }
+      nav { min-height:68px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+      .brand { display:flex; align-items:center; gap:10px; text-decoration:none; font-weight:900; }
+      .brand img { width:44px; height:44px; object-fit:contain; }
+      .button { display:inline-flex; min-height:42px; align-items:center; justify-content:center; padding:0 16px; border:1px solid rgba(66,209,189,.62); border-radius:10px; background:rgba(5,23,27,.72); text-decoration:none; font-weight:850; cursor:pointer; }
+      .button.primary { color:#031314; background:linear-gradient(110deg,var(--hot),#55d492); border-color:transparent; }
+      .hero { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(260px,.55fr); align-items:center; gap:56px; padding:84px 0 64px; }
+      .eyebrow { display:block; color:var(--hot); font-size:12px; font-weight:900; letter-spacing:.18em; text-transform:uppercase; }
+      .status { width:fit-content; max-width:100%; display:flex; margin-top:16px; padding:8px 12px; border:1px solid rgba(255,211,106,.42); border-radius:999px; color:var(--amber); background:rgba(255,211,106,.08); font-size:12px; font-weight:900; line-height:1.35; letter-spacing:.04em; text-align:center; }
+      h1 { margin:16px 0 20px; font-size:clamp(52px,8vw,96px); line-height:.92; letter-spacing:-.06em; }
+      h1 span { color:var(--hot); }
+      .hero p { max-width:700px; margin:0; color:var(--muted); font-size:clamp(17px,2vw,21px); }
+      .hero-logo { width:min(100%,340px); justify-self:end; padding:26px; border:1px solid var(--line); border-radius:28px; background:linear-gradient(145deg,rgba(66,209,189,.08),rgba(27,139,167,.03)); filter:drop-shadow(0 24px 45px rgba(0,0,0,.36)); }
+      .features { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:28px; }
+      .features div { padding:14px 16px; border:1px solid var(--line); border-radius:10px; background:rgba(255,255,255,.03); }
+      .features strong { display:block; color:var(--hot); font-size:14px; } .features span { color:var(--muted); font-size:12px; }
+      .notice { margin:0 auto 72px; padding:24px; border:1px solid rgba(255,211,106,.3); border-radius:16px; background:rgba(255,211,106,.055); }
+      .notice strong { color:var(--amber); } .notice p { margin:5px 0 0; color:var(--muted); }
+      .gallery-section { padding:60px 0 96px; border-top:1px solid rgba(255,255,255,.08); }
+      .section-head { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:30px; }
+      h2 { margin:8px 0 0; font-size:clamp(34px,5vw,58px); line-height:1; letter-spacing:-.045em; }
+      .section-head p { max-width:470px; margin:0; color:var(--muted); }
+      .gallery { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:18px; align-items:start; }
+      .shot { margin:0; padding:0; border:0; background:transparent; cursor:zoom-in; transition:transform .25s ease,filter .25s ease; }
+      .shot:hover { transform:translateY(-8px); filter:drop-shadow(0 22px 30px rgba(0,0,0,.55)); }
+      .shot img { width:100%; height:auto; }
+      .shot span { display:block; margin-top:10px; color:var(--muted); font-size:12px; font-weight:800; text-align:center; }
+      dialog { width:min(560px,calc(100% - 24px)); max-height:calc(100vh - 24px); padding:0; border:1px solid rgba(66,209,189,.7); border-radius:22px; background:#031013; }
+      dialog::backdrop { background:rgba(0,0,0,.86); backdrop-filter:blur(8px); }
+      dialog img { width:100%; max-height:calc(100vh - 70px); object-fit:contain; }
+      dialog button { position:absolute; top:12px; right:12px; width:40px; height:40px; border:1px solid rgba(255,255,255,.3); border-radius:50%; color:#fff; background:rgba(0,0,0,.74); font-size:22px; cursor:pointer; }
+      footer { display:flex; justify-content:space-between; gap:20px; padding:28px 0 40px; border-top:1px solid rgba(255,255,255,.08); color:var(--muted); font-size:13px; }
+      @media(max-width:900px){ .hero{grid-template-columns:1fr;gap:30px;padding-top:58px}.hero-logo{width:220px;justify-self:start}.features{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:repeat(3,1fr)} }
+      @media(max-width:620px){ .hero{padding:44px 0}.features{grid-template-columns:1fr}.section-head{display:grid}.gallery{grid-template-columns:repeat(2,1fr);gap:12px}.shot:last-child{grid-column:1/-1;width:calc(50% - 6px);justify-self:center}footer{display:grid} }
+    </style>
+  </head>
+  <body>
+    <header><nav class="shell"><a class="brand" href="../"><img src="../assets/control-flota-logo.png" alt=""><span>Control Flota</span></a><a class="button" href="../">Volver</a></nav></header>
+    <main>
+      <section class="hero shell">
+        <div><span class="eyebrow">Reparto · Equipo · Localización</span><div class="status">PRODUCTO + BASE DE DATOS · REQUIERE ACTIVACIÓN</div><h1>Tu reparto, bajo <span>control.</span></h1><p>Una solución para administrar empleados, jornadas, pedidos y ubicación de repartidores desde una interfaz clara y adaptada al móvil.</p><div class="features"><div><strong>Pedidos</strong><span>Alta y seguimiento</span></div><div><strong>Empleados</strong><span>Jornadas y estados</span></div><div><strong>Mapa</strong><span>Localización del equipo</span></div><div><strong>Firebase</strong><span>Base de datos propia</span></div></div></div>
+        <div class="hero-logo"><img src="../assets/control-flota-logo.png" alt="Logotipo de Control Flota"></div>
+      </section>
+      <aside class="notice shell"><strong>Configuración necesaria</strong><p>El producto no está activo por defecto. Para utilizarlo hay que crear o conectar un proyecto Firebase, configurar sus credenciales y activar la base de datos del cliente.</p></aside>
+      <section class="gallery-section" id="capturas"><div class="shell"><div class="section-head"><div><span class="eyebrow">Vista previa</span><h2>Administrador y empleado</h2></div><p>Cuatro vistas del panel de administración y una vista del empleado. Pulsa una captura para ampliarla.</p></div><div class="gallery">
+        <button class="shot" type="button" data-title="Administrador · Pedidos"><img src="../assets/screenshots/control-flota/pedidos.png" alt="Pantalla de pedidos del administrador"><span>Admin · Pedidos</span></button>
+        <button class="shot" type="button" data-title="Administrador · Mapa"><img src="../assets/screenshots/control-flota/mapa.png" alt="Mapa de repartidores del administrador" loading="lazy"><span>Admin · Mapa</span></button>
+        <button class="shot" type="button" data-title="Administrador · Estado"><img src="../assets/screenshots/control-flota/estado.png" alt="Resumen de estado del administrador" loading="lazy"><span>Admin · Estado</span></button>
+        <button class="shot" type="button" data-title="Administrador · Detalle de pedido"><img src="../assets/screenshots/control-flota/detalle-pedido.png" alt="Detalle de pedido del administrador" loading="lazy"><span>Admin · Detalle</span></button>
+        <button class="shot" type="button" data-title="Empleado · Jornada y pedidos"><img src="../assets/screenshots/control-flota/empleado.jpeg" alt="Pantalla de jornada y pedidos del empleado" loading="lazy"><span>Empleado</span></button>
+      </div></div></section>
+    </main>
+    <dialog id="previewDialog" aria-label="Captura ampliada"><button type="button" aria-label="Cerrar">×</button><img src="" alt=""></dialog>
+    <footer class="shell"><span>© 2026 Charyster · Control Flota</span><span>Producto configurable con base de datos propia</span></footer>
+    <script>const dialog=document.querySelector("#previewDialog"),preview=dialog.querySelector("img");document.querySelectorAll(".shot").forEach(shot=>shot.addEventListener("click",()=>{const image=shot.querySelector("img");preview.src=image.src;preview.alt=shot.dataset.title;dialog.showModal()}));dialog.querySelector("button").addEventListener("click",()=>dialog.close());dialog.addEventListener("click",event=>{if(event.target===dialog)dialog.close()});</script>
+  </body>
+</html>

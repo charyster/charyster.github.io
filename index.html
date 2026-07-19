@@ -352,6 +352,25 @@
       .future-card h3 { margin: 0 0 10px; font-size: 1.25rem; }
       .future-card p { margin: 0; color: var(--muted); font-size: 0.88rem; }
 
+      .fleet-card {
+        grid-column: 1 / -1;
+        border-color: rgba(35, 169, 183, 0.28);
+      }
+
+      .fleet-card::after {
+        background: radial-gradient(circle, rgba(35, 169, 183, 0.18), transparent 67%);
+      }
+
+      .fleet-visual {
+        background: linear-gradient(145deg, rgba(10, 49, 61, 0.84), rgba(5, 19, 23, 0.96));
+      }
+
+      .fleet-visual img { width: 74%; }
+
+      .status-setup {
+        color: #ffd36a;
+      }
+
       .contact {
         display: flex;
         align-items: center;
@@ -476,13 +495,22 @@
               </div>
             </article>
 
-            <aside class="future-card">
-              <div>
-                <div class="future-icon" aria-hidden="true">＋</div>
-                <h3>Próximamente</h3>
-                <p>Nuevos proyectos y aplicaciones se incorporarán aquí.</p>
+            <article class="app-card fleet-card">
+              <div class="app-content">
+                <span class="number status-setup">02 · PRODUCTO + BD · REQUIERE ACTIVACIÓN</span>
+                <h3>Control Flota</h3>
+                <p>Gestión de repartidores, pedidos, jornadas y localización. Se entrega como solución configurable y necesita activar y conectar su propia base de datos Firebase.</p>
+                <div class="tags" aria-label="Características">
+                  <span>Web</span><span>Android</span><span>Administración</span><span>Firebase</span>
+                </div>
+                <div class="card-actions">
+                  <a class="button primary" href="./control-flota/">Ver producto <span aria-hidden="true">→</span></a>
+                </div>
               </div>
-            </aside>
+              <div class="app-visual fleet-visual" aria-hidden="true">
+                <img src="./assets/control-flota-logo.png" alt="">
+              </div>
+            </article>
           </div>
         </div>
       </section>
