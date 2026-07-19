@@ -130,18 +130,18 @@
         position: relative;
         margin: 0;
         padding: 0;
-        overflow: hidden;
-        border: 1px solid rgba(255, 255, 255, .12);
-        border-radius: 22px;
-        background: #020302;
+        overflow: visible;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
         cursor: zoom-in;
-        box-shadow: 0 24px 54px rgba(0, 0, 0, .32);
-        transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+        box-shadow: none;
+        transition: transform .25s ease, filter .25s ease;
       }
 
-      .shot:hover { transform: translateY(-8px); border-color: var(--line-hot); box-shadow: 0 28px 70px rgba(0, 0, 0, .48), 0 0 24px rgba(96, 255, 126, .08); }
+      .shot:hover { transform: translateY(-8px); filter: drop-shadow(0 22px 30px rgba(0, 0, 0, .55)); }
       .shot img { display: block; width: 100%; height: auto; }
-      .shot span { position: absolute; right: 12px; bottom: 12px; left: 12px; padding: 8px 10px; border: 1px solid rgba(255,255,255,.14); border-radius: 8px; color: white; background: rgba(0,0,0,.72); font-size: 12px; font-weight: 850; backdrop-filter: blur(10px); }
+      .shot span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
       dialog { width: min(560px, calc(100% - 24px)); max-height: calc(100vh - 24px); padding: 0; border: 1px solid var(--line-hot); border-radius: 24px; color: var(--text); background: #030604; box-shadow: 0 30px 100px rgba(0,0,0,.8); }
       dialog::backdrop { background: rgba(0, 0, 0, .86); backdrop-filter: blur(8px); }
