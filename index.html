@@ -357,6 +357,24 @@
         border-color: rgba(35, 169, 183, 0.28);
       }
 
+      .portalyster-card {
+        grid-column: 1 / -1;
+        border-color: rgba(82, 210, 178, 0.3);
+      }
+
+      .portalyster-card::after {
+        background: radial-gradient(circle, rgba(82, 210, 178, 0.2), transparent 67%);
+      }
+
+      .portalyster-visual {
+        background:
+          radial-gradient(circle at 24% 18%, rgba(91, 213, 255, 0.2), transparent 34%),
+          radial-gradient(circle at 80% 76%, rgba(169, 242, 76, 0.16), transparent 35%),
+          linear-gradient(145deg, rgba(13, 42, 42, 0.95), rgba(5, 17, 20, 0.98));
+      }
+
+      .portalyster-visual img { width: 68%; border-radius: 22%; }
+
       .fleet-card::after {
         background: radial-gradient(circle, rgba(35, 169, 183, 0.18), transparent 67%);
       }
@@ -495,9 +513,28 @@
               </div>
             </article>
 
+            <article class="app-card portalyster-card">
+              <div class="app-content">
+                <span class="number">02 · PRODUCTO ACTIVO</span>
+                <h3>Portalyster</h3>
+                <p>Organiza tus páginas favoritas, descubre fuentes en español y abre cada enlace directamente en el navegador.</p>
+                <div class="tags" aria-label="Características">
+                  <span>Android</span><span>Favoritos</span><span>Tableros</span><span>RSS</span>
+                </div>
+                <div class="card-actions">
+                  <a class="button primary" href="./portalyster/">Ver app <span aria-hidden="true">→</span></a>
+                  <a class="button" href="https://portalyster.joseantoniosanchezm1.chatgpt.site/privacidad">Privacidad</a>
+                  <a class="button" href="mailto:info@charyster.com">Soporte</a>
+                </div>
+              </div>
+              <div class="app-visual portalyster-visual" aria-hidden="true">
+                <img src="./assets/portalyster-logo.webp" alt="">
+              </div>
+            </article>
+
             <article class="app-card fleet-card">
               <div class="app-content">
-                <span class="number status-setup">02 · PRODUCTO + BD · REQUIERE ACTIVACIÓN</span>
+                <span class="number status-setup">03 · PRODUCTO + BD · REQUIERE ACTIVACIÓN</span>
                 <h3>Control Flota</h3>
                 <p>Gestión de repartidores, pedidos, jornadas y localización. Se entrega como solución configurable y necesita activar y conectar su propia base de datos Firebase.</p>
                 <div class="tags" aria-label="Características">
