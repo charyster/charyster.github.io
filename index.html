@@ -389,6 +389,48 @@
         color: #ffd36a;
       }
 
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .service-card {
+        min-height: 250px;
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: linear-gradient(145deg, rgba(14, 24, 18, 0.84), rgba(7, 11, 9, 0.9));
+      }
+
+      .service-card h3 { margin: 18px 0 10px; font-size: 1.25rem; }
+      .service-card p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+      .service-card .button { margin-top: 20px; }
+      .service-note { margin: 22px 0 0; color: var(--muted); font-size: 0.82rem; }
+
+      .nexo-card {
+        grid-column: 1 / -1;
+        border-color: rgba(82, 210, 178, 0.3);
+      }
+
+      .nexo-card::after {
+        background: radial-gradient(circle, rgba(82, 210, 178, 0.2), transparent 67%);
+      }
+
+      .nexo-visual {
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(circle at 50% 45%, rgba(82, 210, 178, 0.17), transparent 48%),
+          linear-gradient(145deg, rgba(13, 42, 42, 0.95), rgba(5, 17, 20, 0.98));
+      }
+
+      .nexo-visual img {
+        width: min(78%, 360px);
+        border-radius: 14px;
+        filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.35));
+      }
+
       .contact {
         display: flex;
         align-items: center;
@@ -424,6 +466,7 @@
         .app-visual { min-height: 260px; margin: 0 20px 20px; }
         .future-card { min-height: 260px; }
         .section-heading, .contact { align-items: flex-start; flex-direction: column; }
+        .services-grid { grid-template-columns: 1fr; }
       }
 
       @media (max-width: 540px) {
@@ -459,6 +502,7 @@
         </a>
         <nav aria-label="Navegación principal">
           <a href="#proyectos">Proyectos</a>
+          <a href="#servicios">Servicios</a>
           <a href="./fitlevelup/privacy.html">Privacidad</a>
           <a href="https://github.com/charyster" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           <a class="nav-contact" href="mailto:info@charyster.com">Contacto</a>
@@ -548,7 +592,56 @@
                 <img src="./assets/control-flota-logo.svg" alt="">
               </div>
             </article>
+
+            <article class="app-card nexo-card">
+              <div class="app-content">
+                <span class="number">04 · APLICACIÓN MULTIPLATAFORMA · EN DESARROLLO</span>
+                <h3>Nexo Seguridad</h3>
+                <p>Aplicación de gestión para empresas de mantenimiento de equipos de seguridad: equipos e inventario, materiales, averías, proyectos, firmware y agenda. Los datos guardados se sincronizan en la nube entre dispositivos autorizados.</p>
+                <div class="tags" aria-label="Plataformas y funciones">
+                  <span>Multiplataforma</span><span>Equipos</span><span>Inventario</span><span>Mantenimiento</span>
+                </div>
+                <div class="card-actions">
+                  <a class="button primary" href="./nexo-seguridad/" target="_blank" rel="noopener noreferrer">Ver proyecto <span aria-hidden="true">→</span></a>
+                </div>
+              </div>
+              <div class="app-visual nexo-visual" aria-hidden="true">
+                <img src="./assets/nexo-seguridad.png" alt="">
+              </div>
+            </article>
           </div>
+        </div>
+      </section>
+
+      <section class="section" id="servicios">
+        <div class="shell">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Soluciones para tu negocio</span>
+              <h2>Tu idea, lista para Internet</h2>
+            </div>
+            <p>Desarrollamos páginas web y aplicaciones de administración adaptadas a las necesidades de cada negocio.</p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card">
+              <span class="number">01 · PÁGINAS WEB</span>
+              <h3>Una web para tu negocio</h3>
+              <p>Diseñamos páginas claras y adaptadas a móviles para presentar tus servicios y facilitar que tus clientes contacten contigo. Podemos preparar un prediseño gratuito y sin compromiso para que valores la propuesta.</p>
+            </article>
+            <article class="service-card">
+              <span class="number">02 · APLICACIONES ANDROID</span>
+              <h3>Administra desde el móvil</h3>
+              <p>Podemos crear aplicaciones Android de administración para ayudarte a organizar la actividad de tu negocio, con funciones pensadas para tu forma de trabajar.</p>
+            </article>
+            <article class="service-card">
+              <span class="number">03 · DOMINIOS</span>
+              <h3>Con o sin dominio propio</h3>
+              <p>Te ayudamos a elegir y configurar un dominio, conectar uno que ya tengas o valorar alternativas con direcciones gratuitas cuando el proyecto lo permita.</p>
+              <a class="button" href="https://www.namecheap.com/domains/domain-name-search/" target="_blank" rel="noopener noreferrer">Comprueba tu dominio <span aria-hidden="true">↗</span></a>
+            </article>
+          </div>
+          <p class="service-note">Los dominios propios pueden tener costes de registro y renovación independientes del desarrollo de la página web.</p>
         </div>
       </section>
 
