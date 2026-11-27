@@ -62,6 +62,14 @@
       .tag.green { border-color: rgba(50,239,109,.28); color: var(--green); }
       .safety-note { margin-top: 14px; padding: 14px 16px; border-left: 3px solid var(--amber); border-radius: 0 10px 10px 0; background: rgba(255,203,114,.06); color: #d4c6a8; }
       .game-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 18px; align-items: stretch; }
+      .exercise-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin: -8px 0 18px; }
+      .exercise-tab { min-height: 42px; border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; background: var(--surface); color: var(--muted); font: inherit; font-size: 14px; font-weight: 750; cursor: pointer; transition: border-color 150ms ease, background 150ms ease, color 150ms ease; }
+      .exercise-tab:hover { border-color: rgba(50,239,109,.48); color: var(--text); }
+      .exercise-tab[aria-selected="true"] { border-color: rgba(50,239,109,.55); background: rgba(50,239,109,.1); color: var(--green); }
+      .exercise-panel[hidden] { display: none; }
+      .exercise-placeholder { min-height: 250px; }
+      .exercise-placeholder .mission { display: flex; flex-direction: column; justify-content: center; }
+      .exercise-placeholder .terminal-output { min-height: 190px; }
       .mission { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
       .mission-select { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
       .mission-select button { border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; background: #080d0a; color: var(--muted); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
@@ -104,6 +112,7 @@
         .nav-card { min-height: 68px; }
         .section-head { align-items: flex-start; flex-direction: column; gap: 9px; }
         .game-layout { grid-template-columns: 1fr; }
+        .exercise-tabs { display: grid; grid-template-columns: 1fr; }
         .command-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
       @media (max-width: 520px) {
@@ -166,6 +175,12 @@
           <div><span class="eyebrow">Juego de fundamentos · 6 misiones</span><h2 id="games-title">Aprende jugando</h2></div>
             <p>Un recorrido paso a paso para aprender a orientarte, moverte entre carpetas, leer archivos y cambiar de usuario. Completa cada misión para desbloquear la siguiente.</p>
         </div>
+        <div class="exercise-tabs" role="tablist" aria-label="Ejercicios de Linux">
+          <button class="exercise-tab" type="button" role="tab" id="tab-comandos" aria-controls="ejercicio-comandos" aria-selected="true" data-exercise="ejercicio-comandos">Comandos bajo control</button>
+          <button class="exercise-tab" type="button" role="tab" id="tab-archivos" aria-controls="ejercicio-archivos" aria-selected="false" data-exercise="ejercicio-archivos">Archivos y búsquedas</button>
+          <button class="exercise-tab" type="button" role="tab" id="tab-usuarios" aria-controls="ejercicio-usuarios" aria-selected="false" data-exercise="ejercicio-usuarios">Usuarios y permisos</button>
+        </div>
+        <div class="exercise-panel" id="ejercicio-comandos" role="tabpanel" aria-labelledby="tab-comandos">
         <div class="game-layout">
           <article class="mission">
             <div class="mission-select" aria-label="Misiones">
@@ -190,6 +205,27 @@
               <input class="terminal-input" id="terminal-input" name="command" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Escribe un comando Linux">
               <button type="submit">Ejecutar</button>
             </form>
+          </div>
+        </div>
+        </div>
+        <div class="exercise-panel" id="ejercicio-archivos" role="tabpanel" aria-labelledby="tab-archivos" hidden>
+          <div class="game-layout exercise-placeholder">
+            <article class="mission"><span class="tag">En construcción</span><h3 style="margin-top:16px">Archivos y búsquedas</h3><p>Un ejercicio para practicar cómo localizar archivos y consultar su contenido. Estamos preparando las misiones.</p></article>
+            <div class="terminal" aria-label="Terminal del ejercicio Archivos y búsquedas">
+              <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span> terminal-charyster</div>
+              <div class="terminal-output" role="log" aria-live="polite"><p class="terminal-line system">Terminal del ejercicio Archivos y búsquedas.</p><p class="terminal-line system">En construcción. Pronto podrás practicar aquí.</p></div>
+              <form class="terminal-form"><label class="prompt">user:~$</label><input class="terminal-input" disabled aria-label="Terminal en construcción"><button type="button" disabled>Ejecutar</button></form>
+            </div>
+          </div>
+        </div>
+        <div class="exercise-panel" id="ejercicio-usuarios" role="tabpanel" aria-labelledby="tab-usuarios" hidden>
+          <div class="game-layout exercise-placeholder">
+            <article class="mission"><span class="tag">En construcción</span><h3 style="margin-top:16px">Usuarios y permisos</h3><p>Un ejercicio para aprender a cambiar de usuario y entender permisos básicos. Estamos preparando las misiones.</p></article>
+            <div class="terminal" aria-label="Terminal del ejercicio Usuarios y permisos">
+              <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span> terminal-charyster</div>
+              <div class="terminal-output" role="log" aria-live="polite"><p class="terminal-line system">Terminal del ejercicio Usuarios y permisos.</p><p class="terminal-line system">En construcción. Pronto podrás practicar aquí.</p></div>
+              <form class="terminal-form"><label class="prompt">user:~$</label><input class="terminal-input" disabled aria-label="Terminal en construcción"><button type="button" disabled>Ejecutar</button></form>
+            </div>
           </div>
         </div>
       </section>
@@ -248,6 +284,8 @@
         const missionTitle = document.getElementById("mission-title");
         const missionDescription = document.getElementById("mission-description");
         const missionHint = document.getElementById("mission-hint");
+        const exerciseTabs = [...document.querySelectorAll("[data-exercise]")];
+        const exercisePanels = [...document.querySelectorAll(".exercise-panel")];
         const missions = [
           { badge: "Misión 01 · Reconocimiento", title: "¿Dónde estoy?", description: "Familiarízate con la terminal. Comprueba tu ubicación, tu usuario y qué archivos tienes usando pwd, whoami y ls.", hint: "Prueba pwd, whoami y ls; puedes ejecutarlos en el orden que quieras." },
           { badge: "Misión 02 · Primer recorrido", title: "Entra en retos", description: "Abre la carpeta retos y lista su contenido. Así practicas cambiar de directorio y explorar lo que contiene.", hint: "Prueba cd retos y luego ls. Para volver atrás, puedes usar cd .. ." },
@@ -256,6 +294,11 @@
           { badge: "Misión 05 · Cambiar de usuario", title: "Entra como aprendiz2", description: "Cambia del usuario user a aprendiz2 con su. La contraseña apareció en la misión anterior.", hint: "Escribe su aprendiz2. Cuando aparezca la petición de contraseña, introdúcela y pulsa Ejecutar." },
           { badge: "Misión 06 · Leer registros", title: "Busca las claves", description: "Como aprendiz2, examina los registros para encontrar la clave final. Aquí practicarás sed y grep.", hint: "La segunda línea de apuntes/registro.txt contiene una clave. Después, filtra accesos.log con grep." }
         ];
+
+        exerciseTabs.forEach(tab => tab.addEventListener("click", () => {
+          exerciseTabs.forEach(item => item.setAttribute("aria-selected", String(item === tab)));
+          exercisePanels.forEach(panel => { panel.hidden = panel.id !== tab.dataset.exercise; });
+        }));
 
         function pathOf(path) {
           const parts = (path.startsWith("/") ? path : `${current}/${path}`).split("/");
