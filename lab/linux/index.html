@@ -164,7 +164,7 @@
           <article class="card">
             <div class="card-top"><h3>Próxima herramienta</h3><span class="tag">Por probar</span></div>
             <p>Reservado para otra utilidad de Kali Linux cuando la hayamos probado y podamos explicar su uso.</p>
-            <span class="tag green">Kali Linux</span>
+            <span class="tag green">Linux</span>
           </article>
         </div>
         <div class="safety-note">Practica las auditorías únicamente en equipos y redes propios o con autorización expresa.</div>
@@ -179,6 +179,7 @@
           <button class="exercise-tab" type="button" role="tab" id="tab-comandos" aria-controls="ejercicio-comandos" aria-selected="true" data-exercise="ejercicio-comandos">Comandos bajo control</button>
           <button class="exercise-tab" type="button" role="tab" id="tab-archivos" aria-controls="ejercicio-archivos" aria-selected="false" data-exercise="ejercicio-archivos">Archivos y búsquedas</button>
           <button class="exercise-tab" type="button" role="tab" id="tab-usuarios" aria-controls="ejercicio-usuarios" aria-selected="false" data-exercise="ejercicio-usuarios">Usuarios y permisos</button>
+          <button class="exercise-tab" type="button" role="tab" id="tab-proximo" aria-controls="ejercicio-proximo" aria-selected="false" data-exercise="ejercicio-proximo">En construcción</button>
         </div>
         <div class="exercise-panel" id="ejercicio-comandos" role="tabpanel" aria-labelledby="tab-comandos">
         <div class="game-layout">
@@ -209,21 +210,71 @@
         </div>
         </div>
         <div class="exercise-panel" id="ejercicio-archivos" role="tabpanel" aria-labelledby="tab-archivos" hidden>
-          <div class="game-layout exercise-placeholder">
-            <article class="mission"><span class="tag">En construcción</span><h3 style="margin-top:16px">Archivos y búsquedas</h3><p>Un ejercicio para practicar cómo localizar archivos y consultar su contenido. Estamos preparando las misiones.</p></article>
-            <div class="terminal" aria-label="Terminal del ejercicio Archivos y búsquedas">
+          <div class="game-layout">
+            <article class="mission">
+              <div class="mission-select" aria-label="Misiones de archivos y búsquedas">
+                <button type="button" data-file-mission="0" aria-current="step">Misión 1</button>
+                <button type="button" data-file-mission="1" disabled>Misión 2 · Bloqueada</button>
+                <button type="button" data-file-mission="2" disabled>Misión 3 · Bloqueada</button>
+                <button type="button" data-file-mission="3" disabled>Misión 4 · Bloqueada</button>
+                <button type="button" data-file-mission="4" disabled>Misión 5 · Bloqueada</button>
+                <button type="button" data-file-mission="5" disabled>Misión 6 · Bloqueada</button>
+                <button type="button" data-file-mission="6" disabled>Misión 7 · Bloqueada</button>
+                <button type="button" data-file-mission="7" disabled>Misión 8 · Bloqueada</button>
+              </div>
+              <span class="tag green" id="file-mission-badge">Misión 01 · Explorar</span>
+              <h3 id="file-mission-title" style="margin-top:16px">Prepara la búsqueda</h3>
+              <p id="file-mission-description">Comprueba en qué carpeta estás y qué contiene tu directorio personal.</p>
+              <div class="hint" id="file-mission-hint"><strong>Pista:</strong> empieza con <code>pwd</code> y <code>ls</code>.</div>
+              <p id="file-mission-state" aria-live="polite" style="font-size:14px">Estado: misión 1 de 8 sin completar.</p>
+            </article>
+            <div class="terminal" aria-label="Terminal del juego Archivos y búsquedas">
               <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span> terminal-charyster</div>
-              <div class="terminal-output" role="log" aria-live="polite"><p class="terminal-line system">Terminal del ejercicio Archivos y búsquedas.</p><p class="terminal-line system">En construcción. Pronto podrás practicar aquí.</p></div>
-              <form class="terminal-form"><label class="prompt">user:~$</label><input class="terminal-input" disabled aria-label="Terminal en construcción"><button type="button" disabled>Ejecutar</button></form>
+              <div class="terminal-output" id="file-terminal-output" role="log" aria-live="polite" aria-label="Salida de la terminal del juego"></div>
+              <form class="terminal-form" id="file-terminal-form">
+                <label class="prompt" for="file-terminal-input" id="file-terminal-prompt">user:~$</label>
+                <input class="terminal-input" id="file-terminal-input" name="file-command" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Escribe un comando del juego Archivos y búsquedas">
+                <button type="submit">Ejecutar</button>
+              </form>
             </div>
           </div>
         </div>
         <div class="exercise-panel" id="ejercicio-usuarios" role="tabpanel" aria-labelledby="tab-usuarios" hidden>
-          <div class="game-layout exercise-placeholder">
-            <article class="mission"><span class="tag">En construcción</span><h3 style="margin-top:16px">Usuarios y permisos</h3><p>Un ejercicio para aprender a cambiar de usuario y entender permisos básicos. Estamos preparando las misiones.</p></article>
-            <div class="terminal" aria-label="Terminal del ejercicio Usuarios y permisos">
+          <div class="game-layout">
+            <article class="mission">
+              <div class="mission-select" aria-label="Misiones de usuarios y permisos">
+                <button type="button" data-permission-mission="0" aria-current="step">Misión 1</button>
+                <button type="button" data-permission-mission="1" disabled>Misión 2 · Bloqueada</button>
+                <button type="button" data-permission-mission="2" disabled>Misión 3 · Bloqueada</button>
+                <button type="button" data-permission-mission="3" disabled>Misión 4 · Bloqueada</button>
+                <button type="button" data-permission-mission="4" disabled>Misión 5 · Bloqueada</button>
+                <button type="button" data-permission-mission="5" disabled>Misión 6 · Bloqueada</button>
+                <button type="button" data-permission-mission="6" disabled>Misión 7 · Bloqueada</button>
+                <button type="button" data-permission-mission="7" disabled>Misión 8 · Bloqueada</button>
+              </div>
+              <span class="tag green" id="permission-mission-badge">Misión 01 · Identidad</span>
+              <h3 id="permission-mission-title" style="margin-top:16px">¿Quién eres?</h3>
+              <p id="permission-mission-description">Comprueba con qué usuario has iniciado la práctica.</p>
+              <div class="hint" id="permission-mission-hint"><strong>Pista:</strong> usa whoami.</div>
+              <p id="permission-mission-state" aria-live="polite" style="font-size:14px">Estado: misión 1 de 8 sin completar.</p>
+            </article>
+            <div class="terminal" aria-label="Terminal del juego Usuarios y permisos">
               <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span> terminal-charyster</div>
-              <div class="terminal-output" role="log" aria-live="polite"><p class="terminal-line system">Terminal del ejercicio Usuarios y permisos.</p><p class="terminal-line system">En construcción. Pronto podrás practicar aquí.</p></div>
+              <div class="terminal-output" id="permission-terminal-output" role="log" aria-live="polite" aria-label="Salida de la terminal de usuarios y permisos"></div>
+              <form class="terminal-form" id="permission-terminal-form">
+                <label class="prompt" for="permission-terminal-input" id="permission-terminal-prompt">user:~$</label>
+                <input class="terminal-input" id="permission-terminal-input" name="permission-command" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Escribe un comando del juego Usuarios y permisos">
+                <button type="submit">Ejecutar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="exercise-panel exercise-placeholder" id="ejercicio-proximo" role="tabpanel" aria-labelledby="tab-proximo" hidden>
+          <div class="game-layout exercise-placeholder">
+            <article class="mission"><span class="tag">En construcción</span><h3 style="margin-top:16px">Próximo juego</h3><p>Aquí añadiremos otro ejercicio de Linux cuando decidamos su historia y los comandos que enseñará.</p></article>
+            <div class="terminal" aria-label="Terminal del próximo juego">
+              <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span> terminal-charyster</div>
+              <div class="terminal-output" role="log" aria-live="polite"><p class="terminal-line system">Este espacio está reservado para el próximo juego.</p></div>
               <form class="terminal-form"><label class="prompt">user:~$</label><input class="terminal-input" disabled aria-label="Terminal en construcción"><button type="button" disabled>Ejecutar</button></form>
             </div>
           </div>
@@ -238,13 +289,20 @@
         <div class="command-grid">
           <details class="command-card"><summary><code>pwd</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Muestra la carpeta en la que estás. Misión 1.</p><span class="command-example">pwd</span></div></details>
           <details class="command-card"><summary><code>whoami</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Indica con qué usuario estás trabajando.</p><span class="command-example">whoami</span></div></details>
-          <details class="command-card"><summary><code>ls</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Lista archivos y carpetas. Misiones 1 y 2.</p><span class="command-example">ls -la</span></div></details>
+          <details class="command-card"><summary><code>ls</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Lista archivos y carpetas. La opción -a incluye los ocultos (sus nombres empiezan por punto); -l muestra detalles.</p><span class="command-example">ls -la</span></div></details>
           <details class="command-card"><summary><code>cd</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Cambia a otra carpeta. Misión 2.</p><span class="command-example">cd retos</span></div></details>
           <details class="command-card"><summary><code>cat</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Muestra el contenido de un archivo. Misiones 3 y 4.</p><span class="command-example">cat bienvenida.txt</span></div></details>
           <details class="command-card"><summary><code>find</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Busca archivos o carpetas por nombre y otras condiciones. Misión 4.</p><span class="command-example">find / -name &quot;clave.txt&quot;</span></div></details>
           <details class="command-card"><summary><code>su</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Cambia al usuario indicado. La terminal pide su contraseña.</p><span class="command-example">su aprendiz2</span></div></details>
           <details class="command-card"><summary><code>sed</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Filtra o transforma texto; por ejemplo, muestra una línea concreta. Misión 5.</p><span class="command-example">sed -n '2p' apuntes/registro.txt</span></div></details>
           <details class="command-card"><summary><code>grep</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Busca palabras o patrones dentro del contenido de archivos. Misión 6.</p><span class="command-example">grep &quot;CLAVE&quot; logs/accesos.log</span></div></details>
+          <details class="command-card"><summary><code>2&gt;/dev/null</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Redirige los mensajes de error para que no aparezcan en la terminal; los resultados de la búsqueda siguen visibles.</p><span class="command-example">find / -name &quot;informe.txt&quot; 2&gt;/dev/null</span></div></details>
+          <details class="command-card"><summary><code>unzip</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Lista o extrae el contenido de un archivo ZIP.</p><span class="command-example">unzip -l pistas.zip</span><span class="command-example">unzip pistas.zip -d pistas</span></div></details>
+          <details class="command-card"><summary><code>ssh</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Abre una sesión segura con otro equipo. En el juego, la conexión será a un servidor simulado.</p><span class="command-example">ssh user@servidor-lab</span></div></details>
+          <details class="command-card"><summary><code>id</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Muestra tu identificador de usuario y los grupos a los que perteneces.</p><span class="command-example">id</span></div></details>
+          <details class="command-card"><summary><code>sudo</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Ejecuta un comando con permisos de administrador, si tu cuenta está autorizada.</p><span class="command-example">sudo -l</span></div></details>
+          <details class="command-card"><summary><code>chmod</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Cambia los permisos de un archivo. En 660, propietario y grupo pueden leer y escribir.</p><span class="command-example">chmod 660 informe.txt</span></div></details>
+          <details class="command-card"><summary><code>chown</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Cambia el propietario o el grupo de un archivo.</p><span class="command-example">sudo chown user:equipo informe.txt</span></div></details>
         </div>
       </section>
 
@@ -294,6 +352,357 @@
           { badge: "Misión 05 · Cambiar de usuario", title: "Entra como aprendiz2", description: "Cambia del usuario user a aprendiz2 con su. La contraseña apareció en la misión anterior.", hint: "Escribe su aprendiz2. Cuando aparezca la petición de contraseña, introdúcela y pulsa Ejecutar." },
           { badge: "Misión 06 · Leer registros", title: "Busca las claves", description: "Como aprendiz2, examina los registros para encontrar la clave final. Aquí practicarás sed y grep.", hint: "La segunda línea de apuntes/registro.txt contiene una clave. Después, filtra accesos.log con grep." }
         ];
+
+        const fileMissionButtons = [...document.querySelectorAll("[data-file-mission]")];
+        const fileOutput = document.getElementById("file-terminal-output");
+        const fileForm = document.getElementById("file-terminal-form");
+        const fileInput = document.getElementById("file-terminal-input");
+        const filePrompt = document.getElementById("file-terminal-prompt");
+        const fileMissionBadge = document.getElementById("file-mission-badge");
+        const fileMissionTitle = document.getElementById("file-mission-title");
+        const fileMissionDescription = document.getElementById("file-mission-description");
+        const fileMissionHint = document.getElementById("file-mission-hint");
+        const fileMissionState = document.getElementById("file-mission-state");
+        const fileMissions = [
+          { badge: "Misión 01 · Explorar", title: "Prepara la búsqueda", description: "Comprueba en qué carpeta estás y qué contiene tu directorio personal.", hint: "Empieza con pwd y ls." },
+          { badge: "Misión 02 · Archivos ocultos", title: "Encuentra la pista oculta", description: "Entra en archivos y localiza la nota oculta. Los nombres que empiezan por punto no se muestran con ls normal.", hint: "Usa cd archivos, después ls -a y lee la nota con cat .pista.txt." },
+          { badge: "Misión 03 · Primera búsqueda", title: "Localiza el paquete", description: "Encuentra el archivo pistas.zip en el sistema. Al principio verás también avisos de permisos.", hint: "Usa find / -name \"pistas.zip\" y observa los mensajes que aparecen." },
+          { badge: "Misión 04 · Limpiar la búsqueda", title: "Oculta los errores", description: "Repite la búsqueda del paquete, pero esta vez evita que los errores de permisos llenen la terminal. El resultado debe seguir apareciendo.", hint: "Añade 2>/dev/null al final: find / -name \"pistas.zip\" 2>/dev/null." },
+          { badge: "Misión 05 · Inspeccionar ZIP", title: "Mira antes de extraer", description: "Consulta qué archivo contiene pistas.zip sin descomprimirlo todavía.", hint: "Usa unzip -l /home/user/archivos/pistas.zip." },
+          { badge: "Misión 06 · Extraer ZIP", title: "Descomprime las pistas", description: "Extrae el informe en una carpeta llamada extraido.", hint: "Usa unzip /home/user/archivos/pistas.zip -d /home/user/archivos/extraido." },
+          { badge: "Misión 07 · Buscar dentro del informe", title: "Encuentra el destino", description: "Busca la palabra Destino dentro del informe extraído.", hint: "Usa grep \"Destino\" /home/user/archivos/extraido/informe.txt." },
+          { badge: "Misión 08 · Servidor del laboratorio", title: "Conéctate por SSH", description: "Conéctate al servidor simulado y lee el archivo que contiene el mensaje final.", hint: "Primero usa ssh user@servidor-lab. Ya dentro, ejecuta cat reto-final.txt." }
+        ];
+        const fileGame = {
+          mission: 0,
+          completed: new Set(),
+          current: "/home/user",
+          remote: false,
+          explored: new Set(),
+          hiddenListed: false,
+          foundArchive: false,
+          archiveListed: false,
+          extracted: false,
+          connected: false,
+          files: {
+            "/home/user/archivos/.pista.txt": "La pista.zip contiene el informe que buscas.",
+            "/home/user/archivos/pistas.zip": "[archivo ZIP simulado]",
+            "/home/user/archivos/extraido/informe.txt": "Proyecto: Charyster\nDestino: servidor-lab\nPista: conecta por SSH para leer el mensaje final.",
+            "/servidor-lab/home/user/reto-final.txt": "¡Misión completada! Has encontrado el informe y accedido al servidor simulado."
+          },
+          directories: new Set(["/", "/home", "/home/user", "/home/user/archivos", "/servidor-lab", "/servidor-lab/home", "/servidor-lab/home/user"])
+        };
+
+        function printFileLine(text, kind = "") {
+          const line = document.createElement("p");
+          line.className = `terminal-line ${kind}`.trim();
+          line.textContent = text;
+          fileOutput.append(line);
+          fileOutput.scrollTop = fileOutput.scrollHeight;
+        }
+
+        function filePrintCommand(command) {
+          const line = document.createElement("p");
+          line.className = "terminal-line";
+          const prefix = document.createElement("span");
+          prefix.className = "prompt";
+          prefix.textContent = filePrompt.textContent;
+          line.append(prefix, document.createTextNode(` ${command}`));
+          fileOutput.append(line);
+          fileOutput.scrollTop = fileOutput.scrollHeight;
+        }
+
+        function updateFilePrompt() {
+          if (fileGame.remote) filePrompt.textContent = "user@servidor-lab:~$";
+          else filePrompt.textContent = fileGame.current === "/home/user" ? "user:~$" : `user:~${fileGame.current.slice("/home/user".length)}$`;
+        }
+
+        function updateFileMission() {
+          const mission = fileMissions[fileGame.mission];
+          fileMissionBadge.textContent = mission.badge;
+          fileMissionTitle.textContent = mission.title;
+          fileMissionDescription.textContent = mission.description;
+          const strong = document.createElement("strong");
+          strong.textContent = "Pista: ";
+          fileMissionHint.replaceChildren(strong, document.createTextNode(mission.hint));
+          fileMissionButtons.forEach((button, index) => {
+            const unlocked = index === 0 || fileGame.completed.has(index - 1);
+            button.disabled = !unlocked;
+            button.textContent = fileGame.completed.has(index) ? `Misión ${index + 1} · ✓` : `Misión ${index + 1}${unlocked ? "" : " · Bloqueada"}`;
+            if (index === fileGame.mission) button.setAttribute("aria-current", "step");
+            else button.removeAttribute("aria-current");
+          });
+          const complete = fileGame.completed.has(fileGame.mission);
+          fileMissionState.textContent = complete ? "Estado: misión completada. ¡Buen trabajo!" : `Estado: misión ${fileGame.mission + 1} de 8 sin completar.`;
+          fileMissionState.style.color = complete ? "var(--green)" : "";
+          updateFilePrompt();
+        }
+
+        function finishFileMission() {
+          if (fileGame.completed.has(fileGame.mission)) return;
+          fileGame.completed.add(fileGame.mission);
+          printFileLine(`¡Misión ${fileGame.mission + 1} completada! Has desbloqueado el siguiente paso.`, "success");
+          updateFileMission();
+        }
+
+        function executeFileCommand(raw) {
+          const command = raw.trim();
+          if (!command) return;
+          filePrintCommand(command);
+          if (command === "clear") { fileOutput.replaceChildren(); return; }
+          const args = command.match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g) || [];
+          const name = args.shift();
+          const unquote = value => value?.replace(/^("|')(.*)\1$/, "$2");
+          let result = "";
+          let kind = "system";
+
+          if (name === "help") result = "Comandos: pwd, ls [-a], cd, find, unzip, grep, ssh, cat, clear";
+          else if (name === "pwd") result = fileGame.current;
+          else if (name === "ls") {
+            const showHidden = args.some(arg => arg.startsWith("-") && arg.includes("a"));
+            const entries = fileGame.remote ? ["reto-final.txt"] : fileGame.current === "/home/user" ? ["archivos"] : fileGame.current === "/home/user/archivos" ? (showHidden ? [".", "..", ".pista.txt", "pistas.zip"] : ["pistas.zip"]) : [];
+            result = entries.join("  ") || "(carpeta vacía)";
+            if (fileGame.mission === 0 && fileGame.current === "/home/user") fileGame.explored.add("ls");
+            if (fileGame.mission === 1 && fileGame.current === "/home/user/archivos" && showHidden) fileGame.hiddenListed = true;
+          } else if (name === "cd") {
+            const destination = args[0] === ".." ? "/home/user" : args[0] === "archivos" ? "/home/user/archivos" : "";
+            if (fileGame.remote) result = "En este servidor de práctica usa ls y cat.";
+            else if (!destination) { result = `cd: no existe el directorio: ${args[0] || "(falta nombre)"}`; kind = "error"; }
+            else {
+              fileGame.current = destination;
+              if (fileGame.mission === 0 && destination === "/home/user") fileGame.explored.add("cd");
+              if (fileGame.mission === 1 && destination === "/home/user/archivos") fileGame.explored.add("cd");
+              updateFilePrompt();
+            }
+          } else if (name === "find") {
+            const withRedirect = args.includes("2>/dev/null");
+            const nameAt = args.indexOf("-name");
+            const pattern = nameAt >= 0 ? unquote(args[nameAt + 1] || "") : "";
+            if (nameAt < 0 || !pattern) { result = "Uso: find / -name \"nombre\" [2>/dev/null]"; kind = "error"; }
+            else if (pattern === "pistas.zip") {
+              result = "/home/user/archivos/pistas.zip";
+              if (!withRedirect) result += "\nfind: '/root': Permiso denegado";
+              if (fileGame.mission === 2) { fileGame.foundArchive = true; if (!withRedirect) finishFileMission(); }
+              if (fileGame.mission === 3 && withRedirect) finishFileMission();
+            } else { result = "No se encontraron coincidencias."; kind = "error"; }
+          } else if (name === "unzip") {
+            const archivePath = "/home/user/archivos/pistas.zip";
+            if (args[0] === "-l" && unquote(args[1] || "") === archivePath) {
+              result = "Archive: pistas.zip\n  informe.txt";
+              if (fileGame.mission === 4) { fileGame.archiveListed = true; finishFileMission(); }
+            } else if (unquote(args[0] || "") === archivePath && args[1] === "-d" && unquote(args[2] || "") === "/home/user/archivos/extraido") {
+              fileGame.extracted = true;
+              fileGame.directories.add("/home/user/archivos/extraido");
+              result = "Se ha extraído informe.txt en /home/user/archivos/extraido";
+              if (fileGame.mission === 5 && fileGame.archiveListed) finishFileMission();
+            } else { result = "Uso: unzip -l archivo.zip o unzip archivo.zip -d carpeta"; kind = "error"; }
+          } else if (name === "grep") {
+            const query = unquote(args[0] || "");
+            const filePath = unquote(args[1] || "");
+            if (query.toLowerCase() === "destino" && filePath === "/home/user/archivos/extraido/informe.txt" && fileGame.extracted) {
+              result = "Destino: servidor-lab";
+              if (fileGame.mission === 6) finishFileMission();
+            } else { result = "grep: no se encontró el texto o el archivo no existe."; kind = "error"; }
+          } else if (name === "ssh") {
+            if (args[0] === "user@servidor-lab") {
+              fileGame.remote = true;
+              fileGame.connected = true;
+              updateFilePrompt();
+              result = "Conexión establecida con servidor-lab (simulación local).";
+              if (fileGame.mission === 7) printFileLine("Conexión establecida. Ahora lee reto-final.txt con cat.", "system");
+            } else { result = "ssh: host desconocido. Usa ssh user@servidor-lab"; kind = "error"; }
+          } else if (name === "cat") {
+            const target = args[0]?.startsWith("/") ? args[0] : `${fileGame.current}/${args[0] || ""}`;
+            if (!fileGame.remote && fileGame.mission === 1 && fileGame.hiddenListed && target === "/home/user/archivos/.pista.txt") {
+              result = fileGame.files[target];
+              finishFileMission();
+            } else if (fileGame.remote && args[0] === "reto-final.txt" && fileGame.connected) {
+              result = fileGame.files["/servidor-lab/home/user/reto-final.txt"];
+              if (fileGame.mission === 7) finishFileMission();
+            } else { result = "cat: archivo no encontrado."; kind = "error"; }
+          } else { result = `${name}: comando no disponible en este juego. Escribe help para ver los permitidos.`; kind = "error"; }
+
+          if (result) printFileLine(result, kind);
+          if (fileGame.mission === 0 && name === "pwd") fileGame.explored.add("pwd");
+          if (fileGame.mission === 0 && fileGame.explored.has("pwd") && fileGame.explored.has("ls")) finishFileMission();
+        }
+
+        fileMissionButtons.forEach(button => button.addEventListener("click", () => {
+          if (button.disabled) return;
+          fileGame.mission = Number(button.dataset.fileMission);
+          fileGame.current = "/home/user";
+          fileGame.remote = false;
+          fileGame.connected = false;
+          fileOutput.replaceChildren();
+          updateFileMission();
+          printFileLine(`Charyster Linux Lab · Archivos y búsquedas · Misión ${String(fileGame.mission + 1).padStart(2, "0")}`, "success");
+          printFileLine("Terminal simulada. Escribe help para consultar los comandos disponibles.", "system");
+          fileInput.focus();
+        }));
+
+        updateFileMission();
+        printFileLine("Charyster Linux Lab · Archivos y búsquedas · 8 misiones", "success");
+        printFileLine("Encuentra un informe, limpia la búsqueda y accede al servidor simulado.", "system");
+        fileForm.addEventListener("submit", event => {
+          event.preventDefault();
+          executeFileCommand(fileInput.value);
+          fileInput.value = "";
+          fileInput.focus();
+        });
+
+        const permissionButtons = [...document.querySelectorAll("[data-permission-mission]")];
+        const permissionOutput = document.getElementById("permission-terminal-output");
+        const permissionForm = document.getElementById("permission-terminal-form");
+        const permissionInput = document.getElementById("permission-terminal-input");
+        const permissionPrompt = document.getElementById("permission-terminal-prompt");
+        const permissionBadge = document.getElementById("permission-mission-badge");
+        const permissionTitle = document.getElementById("permission-mission-title");
+        const permissionDescription = document.getElementById("permission-mission-description");
+        const permissionHint = document.getElementById("permission-mission-hint");
+        const permissionState = document.getElementById("permission-mission-state");
+        const permissionMissions = [
+          { badge: "Misión 01 · Identidad", title: "¿Quién eres?", description: "Comprueba con qué usuario has iniciado la práctica.", hint: "Usa whoami." },
+          { badge: "Misión 02 · Grupos", title: "Mira tus grupos", description: "Averigua qué grupos acompañan a tu usuario. Los grupos pueden dar acceso compartido a archivos.", hint: "Usa id." },
+          { badge: "Misión 03 · Permisos", title: "Lee los permisos", description: "Consulta quién es propietario del informe y qué permisos tiene el archivo.", hint: "Usa ls -l /home/equipo/compartido." },
+          { badge: "Misión 04 · Acceso denegado", title: "Intenta abrir el informe", description: "Prueba a leer el archivo como user. El permiso actual solo deja leerlo al propietario y a su grupo.", hint: "Usa cat /home/equipo/compartido/informe.txt y fíjate en el aviso." },
+          { badge: "Misión 05 · Cambiar de usuario", title: "Entra en el grupo", description: "Cambia al usuario equipo para comprobar cómo cambia el acceso. Contraseña de práctica: EQUIPO-03.", hint: "Usa su equipo y después escribe EQUIPO-03 cuando la terminal pida la contraseña." },
+          { badge: "Misión 06 · Acceso compartido", title: "Lee el informe", description: "Ahora que eres miembro del grupo equipo, vuelve a intentar leer el archivo.", hint: "Usa cat /home/equipo/compartido/informe.txt." },
+          { badge: "Misión 07 · Permisos de administrador", title: "Consulta sudo", description: "Mira qué acciones administrativas están habilitadas en este laboratorio.", hint: "Usa sudo -l." },
+          { badge: "Misión 08 · Ajustar acceso", title: "Comparte el archivo", description: "Da permiso de lectura y escritura al grupo, cambia el propietario y comprueba el resultado.", hint: "Ejecuta sudo chmod 660 /home/equipo/compartido/informe.txt, luego sudo chown user:equipo /home/equipo/compartido/informe.txt y finalmente ls -l /home/equipo/compartido/informe.txt." }
+        ];
+        const permissionGame = { mission: 0, completed: new Set(), currentUser: "user", pendingSu: false, mode: "-rw-r-----", owner: "equipo", group: "equipo", chmodDone: false, chownDone: false };
+
+        function printPermissionLine(text, kind = "") {
+          const line = document.createElement("p");
+          line.className = `terminal-line ${kind}`.trim();
+          line.textContent = text;
+          permissionOutput.append(line);
+          permissionOutput.scrollTop = permissionOutput.scrollHeight;
+        }
+
+        function printPermissionCommand(command) {
+          const line = document.createElement("p");
+          line.className = "terminal-line";
+          const prefix = document.createElement("span");
+          prefix.className = "prompt";
+          prefix.textContent = permissionPrompt.textContent;
+          line.append(prefix, document.createTextNode(` ${command}`));
+          permissionOutput.append(line);
+          permissionOutput.scrollTop = permissionOutput.scrollHeight;
+        }
+
+        function updatePermissionMission() {
+          const mission = permissionMissions[permissionGame.mission];
+          permissionBadge.textContent = mission.badge;
+          permissionTitle.textContent = mission.title;
+          permissionDescription.textContent = mission.description;
+          const strong = document.createElement("strong");
+          strong.textContent = "Pista: ";
+          permissionHint.replaceChildren(strong, document.createTextNode(mission.hint));
+          permissionButtons.forEach((button, index) => {
+            const unlocked = index === 0 || permissionGame.completed.has(index - 1);
+            button.disabled = !unlocked;
+            button.textContent = permissionGame.completed.has(index) ? `Misión ${index + 1} · ✓` : `Misión ${index + 1}${unlocked ? "" : " · Bloqueada"}`;
+            if (index === permissionGame.mission) button.setAttribute("aria-current", "step");
+            else button.removeAttribute("aria-current");
+          });
+          const complete = permissionGame.completed.has(permissionGame.mission);
+          permissionState.textContent = complete ? "Estado: misión completada. ¡Buen trabajo!" : `Estado: misión ${permissionGame.mission + 1} de 8 sin completar.`;
+          permissionState.style.color = complete ? "var(--green)" : "";
+          permissionPrompt.textContent = `${permissionGame.currentUser}:~$`;
+        }
+
+        function finishPermissionMission() {
+          if (permissionGame.completed.has(permissionGame.mission)) return;
+          permissionGame.completed.add(permissionGame.mission);
+          printPermissionLine(`¡Misión ${permissionGame.mission + 1} completada! Has desbloqueado el siguiente paso.`, "success");
+          updatePermissionMission();
+        }
+
+        function executePermissionCommand(raw) {
+          const command = raw.trim();
+          if (!command) return;
+          if (permissionGame.pendingSu) {
+            permissionGame.pendingSu = false;
+            permissionInput.type = "text";
+            if (command === "EQUIPO-03") {
+              permissionGame.currentUser = "equipo";
+              printPermissionLine("Sesión cambiada. Ahora eres equipo.", "success");
+              if (permissionGame.mission === 4) finishPermissionMission();
+            } else printPermissionLine("su: contraseña incorrecta", "error");
+            updatePermissionMission();
+            return;
+          }
+          printPermissionCommand(command);
+          if (command === "clear") { permissionOutput.replaceChildren(); return; }
+          const args = command.match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g) || [];
+          const name = args.shift();
+          let result = "";
+          let kind = "system";
+          if (name === "help") result = "Comandos: whoami, id, ls -l, cat, su, sudo -l, sudo chmod, sudo chown, clear";
+          else if (name === "whoami") {
+            result = permissionGame.currentUser;
+            if (permissionGame.mission === 0 && result === "user") finishPermissionMission();
+          } else if (name === "id") {
+            result = permissionGame.currentUser === "user" ? "uid=1000(user) gid=1000(user) groups=1000(user),1002(practicas)" : "uid=1002(equipo) gid=1002(equipo) groups=1002(equipo),1002(practicas)";
+            if (permissionGame.mission === 1) finishPermissionMission();
+          } else if (name === "ls" && args.includes("-l")) {
+            result = `${permissionGame.mode} 1 ${permissionGame.owner} ${permissionGame.group} 38 informe.txt`;
+            if (permissionGame.mission === 2) finishPermissionMission();
+            if (permissionGame.mission === 7 && permissionGame.chmodDone && permissionGame.chownDone) finishPermissionMission();
+          } else if (name === "cat") {
+            const filePath = args[0];
+            const targetIsReport = filePath === "informe.txt" || filePath === "/home/equipo/compartido/informe.txt";
+            if (targetIsReport && permissionGame.currentUser === "user" && permissionGame.mode === "-rw-r-----") {
+              result = "cat: informe.txt: Permiso denegado";
+              kind = "error";
+              if (permissionGame.mission === 3) finishPermissionMission();
+            } else if (targetIsReport && permissionGame.currentUser === "equipo") {
+              result = "Informe del equipo: el acceso depende de los permisos y del grupo del archivo.";
+              if (permissionGame.mission === 5) finishPermissionMission();
+            } else { result = "cat: archivo no encontrado."; kind = "error"; }
+          } else if (name === "su" && args[0] === "equipo" && permissionGame.currentUser === "user") {
+            permissionGame.pendingSu = true;
+            permissionInput.type = "password";
+            printPermissionLine("Contraseña de equipo:", "system");
+          } else if (name === "sudo" && args[0] === "-l") {
+            result = "En este laboratorio puedes usar sudo para ejecutar chmod y chown sobre informe.txt.";
+            if (permissionGame.mission === 6) finishPermissionMission();
+          } else if (name === "sudo" && args[0] === "chmod" && args[1] === "660" && (args[2] === "informe.txt" || args[2] === "/home/equipo/compartido/informe.txt")) {
+            permissionGame.mode = "-rw-rw----";
+            permissionGame.chmodDone = true;
+            result = "Permisos actualizados: propietario y grupo pueden leer y escribir; el resto no tiene acceso.";
+          } else if (name === "sudo" && args[0] === "chown" && args[1] === "user:equipo" && (args[2] === "informe.txt" || args[2] === "/home/equipo/compartido/informe.txt")) {
+            permissionGame.owner = "user";
+            permissionGame.group = "equipo";
+            permissionGame.chownDone = true;
+            result = "Propietario cambiado a user y grupo cambiado a equipo.";
+          } else if (name === "sudo") { result = "sudo: comando no disponible en este laboratorio."; kind = "error"; }
+          else { result = `${name}: comando no disponible en este juego. Escribe help para ver los permitidos.`; kind = "error"; }
+          if (result) printPermissionLine(result, kind);
+        }
+
+        permissionButtons.forEach(button => button.addEventListener("click", () => {
+          if (button.disabled) return;
+          permissionGame.mission = Number(button.dataset.permissionMission);
+          permissionGame.currentUser = permissionGame.mission < 5 ? "user" : "equipo";
+          permissionGame.pendingSu = false;
+          permissionInput.type = "text";
+          permissionOutput.replaceChildren();
+          updatePermissionMission();
+          printPermissionLine(`Charyster Linux Lab · Usuarios y permisos · Misión ${String(permissionGame.mission + 1).padStart(2, "0")}`, "success");
+          printPermissionLine("Terminal simulada. Escribe help para consultar los comandos disponibles.", "system");
+          permissionInput.focus();
+        }));
+        updatePermissionMission();
+        printPermissionLine("Charyster Linux Lab · Usuarios y permisos · 8 misiones", "success");
+        printPermissionLine("Aprende a identificar cuentas, leer permisos y ajustar el acceso.", "system");
+        permissionForm.addEventListener("submit", event => {
+          event.preventDefault();
+          executePermissionCommand(permissionInput.value);
+          permissionInput.value = "";
+          permissionInput.focus();
+        });
 
         exerciseTabs.forEach(tab => tab.addEventListener("click", () => {
           exerciseTabs.forEach(item => item.setAttribute("aria-selected", String(item === tab)));
