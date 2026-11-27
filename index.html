@@ -224,6 +224,24 @@
         object-fit: cover;
       }
 
+      .lab-promo { padding-bottom: 12px; }
+      .lab-promo-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 22px 26px;
+        border: 1px solid var(--line-strong);
+        border-radius: 16px;
+        background: linear-gradient(110deg, rgba(50,239,109,.09), rgba(11,19,15,.78) 54%, rgba(255,61,72,.04));
+        text-decoration: none;
+        transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+      }
+      .lab-promo-link:hover { transform: translateY(-2px); border-color: var(--green); background: linear-gradient(110deg, rgba(50,239,109,.14), rgba(11,19,15,.86) 54%, rgba(255,61,72,.06)); }
+      .lab-promo-link .eyebrow { margin-bottom: 8px; }
+      .lab-promo-link h2 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.05; letter-spacing: -.05em; }
+      .lab-promo-link p { margin: 7px 0 0; color: var(--muted); }
+
       .section { padding: 70px 0; }
       .section-heading {
         display: flex;
@@ -478,6 +496,7 @@
         nav a:not(.nav-contact):not(.nav-lab) { display: none; }
         .hero { min-height: auto; grid-template-columns: 1fr; padding: 32px 0 38px; }
         .hero-mark { width: min(62vw, 270px); justify-self: center; order: -1; }
+        .lab-promo-link { align-items: flex-start; flex-direction: column; gap: 14px; padding: 20px; }
         .project-grid, .app-card { grid-template-columns: 1fr; }
         .app-card { min-height: 0; }
         .app-visual { height: 140px; min-height: 140px; margin: 0 16px 16px; }
@@ -538,6 +557,16 @@
         <div class="hero-mark" aria-label="Logotipo de Charyster">
           <img src="./assets/charyster-logo.webp" alt="Charyster">
         </div>
+      </section>
+
+      <section class="lab-promo shell" aria-label="Acceso al Lab de Charyster">
+        <a class="lab-promo-link" href="./lab/index.html" target="_blank" rel="noopener noreferrer" aria-label="Abrir el Lab de Charyster en una pestaña nueva">
+          <div>
+            <span class="eyebrow">Explora y aprende</span>
+            <h2>Lab de Charyster</h2>
+            <p>Linux, Flipper Zero y máquinas virtuales en un mismo espacio.</p>
+          </div>
+        </a>
       </section>
 
       <section class="section" id="servicios">
