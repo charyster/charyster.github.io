@@ -61,7 +61,7 @@
       .tag { display: inline-flex; align-items: center; border: 1px solid rgba(255,203,114,.3); border-radius: 999px; padding: 5px 9px; color: var(--amber); font-size: 12px; font-weight: 700; white-space: nowrap; }
       .tag.green { border-color: rgba(50,239,109,.28); color: var(--green); }
       .safety-note { margin-top: 14px; padding: 14px 16px; border-left: 3px solid var(--amber); border-radius: 0 10px 10px 0; background: rgba(255,203,114,.06); color: #d4c6a8; }
-      .game-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 18px; align-items: start; }
+      .game-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 18px; align-items: stretch; }
       .mission { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
       .mission-select { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
       .mission-select button { border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; background: #080d0a; color: var(--muted); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
@@ -69,12 +69,12 @@
       .mission-select button:disabled { opacity: .45; cursor: not-allowed; }
       .mission p { margin-bottom: 0; }
       .hint { margin-top: 18px; padding: 14px; border-radius: 10px; background: rgba(50,239,109,.055); color: var(--muted); font-size: 14px; }
-      .terminal { overflow: hidden; border: 1px solid rgba(123,255,151,.23); border-radius: 15px; background: #070b09; box-shadow: 0 24px 65px rgba(0,0,0,.23); }
+      .terminal { display: flex; flex-direction: column; overflow: hidden; border: 1px solid rgba(123,255,151,.23); border-radius: 15px; background: #070b09; box-shadow: 0 24px 65px rgba(0,0,0,.23); }
       .terminal-bar { min-height: 42px; display: flex; align-items: center; gap: 7px; padding: 0 14px; border-bottom: 1px solid rgba(255,255,255,.08); background: #0d130f; color: var(--muted); font: 13px var(--mono); }
       .terminal-dot { width: 9px; height: 9px; border-radius: 50%; background: #ff6e68; }
       .terminal-dot:nth-child(2) { background: #ffc45e; }
       .terminal-dot:nth-child(3) { background: var(--green); margin-right: 7px; }
-      .terminal-output { height: 238px; overflow: auto; padding: 15px 17px; color: #d7e3da; font: 14px/1.65 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+      .terminal-output { flex: 1 1 auto; min-height: 238px; overflow: auto; padding: 15px 17px; color: #d7e3da; font: 14px/1.65 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
       .terminal-line { margin: 0 0 5px; }
       .terminal-line.system { color: #9ba99f; }
       .terminal-line.success { color: var(--green); }
@@ -84,12 +84,19 @@
       .terminal-input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--text); font: 14px var(--mono); }
       .terminal-form button { border: 1px solid rgba(50,239,109,.35); border-radius: 8px; padding: 8px 12px; background: rgba(50,239,109,.1); color: var(--green); font: 700 13px inherit; cursor: pointer; }
       .terminal-form button:hover { background: rgba(50,239,109,.18); }
-      .command-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: minmax(150px, 1fr); gap: 12px; }
-      .command-card { min-height: 150px; display: flex; flex-direction: column; align-items: flex-start; padding: 16px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); }
+      .command-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+      .command-card { min-width: 0; align-self: start; overflow: hidden; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); }
+      .command-card[open] { position: relative; z-index: 5; overflow: visible; border-radius: 13px 13px 0 0; }
       code, .command-example { color: var(--green); font-family: var(--mono); }
-      .command-card code { font-size: 16px; font-weight: 750; }
-      .command-card p { margin: 4px 0 0; font-size: 14px; }
-      .command-example { display: inline-block; margin-top: 5px; border-radius: 6px; padding: 5px 7px; background: #050907; font-size: 12px; }
+      .command-card summary { min-height: 58px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 14px; cursor: pointer; list-style: none; }
+      .command-card summary::-webkit-details-marker { display: none; }
+      .command-card summary:focus-visible { outline: 2px solid var(--green); outline-offset: -3px; border-radius: 12px; }
+      .command-card code { min-width: 0; overflow-wrap: anywhere; font-size: 15px; font-weight: 750; }
+      .command-chevron { width: 9px; height: 9px; flex: none; margin: -4px 2px 0 0; border-right: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: rotate(45deg); transition: transform 150ms ease; }
+      .command-card[open] .command-chevron { margin-top: 5px; transform: rotate(225deg); }
+      .command-content { position: absolute; top: calc(100% - 1px); left: -1px; right: -1px; z-index: 6; padding: 0 14px 14px; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 13px 13px; background: var(--surface); box-shadow: 0 15px 28px rgba(0,0,0,.42); }
+      .command-card p { margin: 10px 0 0; font-size: 14px; }
+      .command-example { display: inline-block; margin-top: 8px; border-radius: 6px; padding: 5px 7px; background: #050907; font-size: 12px; overflow-wrap: anywhere; }
       footer { margin-top: 76px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.07); color: #9ba69f; font-size: 14px; }
       footer a { text-decoration: none; }
       @media (max-width: 760px) {
@@ -103,8 +110,8 @@
         .shell { width: min(100% - 30px, 1060px); }
         main { padding-top: 38px; }
         .card-grid, .command-grid { grid-template-columns: 1fr; }
-        .command-grid { grid-auto-rows: minmax(132px, 1fr); }
-        .command-card { min-height: 132px; }
+        .command-card summary { min-height: 54px; padding: 11px 12px; }
+        .command-content { padding: 0 12px 12px; }
         .card { padding: 18px; }
         .card-top { flex-wrap: wrap; }
         .terminal-output { height: 220px; font-size: 13px; }
@@ -113,7 +120,7 @@
       }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
-        .nav-card { transition: none; }
+        .nav-card, .command-chevron { transition: none; }
       }
     </style>
   </head>
@@ -179,7 +186,7 @@
             <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span> terminal-charyster</div>
             <div class="terminal-output" id="terminal-output" role="log" aria-live="polite" aria-label="Salida de la terminal"></div>
             <form class="terminal-form" id="terminal-form">
-              <label class="prompt" for="terminal-input" id="terminal-prompt">alumno:~$</label>
+              <label class="prompt" for="terminal-input" id="terminal-prompt">user:~$</label>
               <input class="terminal-input" id="terminal-input" name="command" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Escribe un comando Linux">
               <button type="submit">Ejecutar</button>
             </form>
@@ -193,15 +200,15 @@
           <p>La guía crecerá con cada juego: explicación sencilla, ejemplo y enlace a la misión donde se usa.</p>
         </div>
         <div class="command-grid">
-          <article class="command-card"><code>pwd</code><p>Muestra la carpeta en la que estás. Misión 1.</p><span class="command-example">pwd</span></article>
-          <article class="command-card"><code>whoami</code><p>Indica con qué usuario estás trabajando.</p><span class="command-example">whoami</span></article>
-          <article class="command-card"><code>ls</code><p>Lista archivos y carpetas. Misiones 1 y 2.</p><span class="command-example">ls -la</span></article>
-          <article class="command-card"><code>cd</code><p>Cambia a otra carpeta. Misión 2.</p><span class="command-example">cd retos</span></article>
-          <article class="command-card"><code>cat</code><p>Muestra el contenido de un archivo. Misiones 3 y 4.</p><span class="command-example">cat bienvenida.txt</span></article>
-          <article class="command-card"><code>find</code><p>Busca archivos o carpetas por nombre y otras condiciones. Misión 4.</p><span class="command-example">find / -name "clave.txt"</span></article>
-          <article class="command-card"><code>su</code><p>Cambia al usuario indicado. La terminal pide su contraseña.</p><span class="command-example">su aprendiz2</span></article>
-          <article class="command-card"><code>sed</code><p>Filtra o transforma texto; por ejemplo, muestra una línea concreta. Misión 5.</p><span class="command-example">sed -n '2p' apuntes/registro.txt</span></article>
-          <article class="command-card"><code>grep</code><p>Busca palabras o patrones dentro del contenido de archivos. Misión 6.</p><span class="command-example">grep "CLAVE" logs/accesos.log</span></article>
+          <details class="command-card"><summary><code>pwd</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Muestra la carpeta en la que estás. Misión 1.</p><span class="command-example">pwd</span></div></details>
+          <details class="command-card"><summary><code>whoami</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Indica con qué usuario estás trabajando.</p><span class="command-example">whoami</span></div></details>
+          <details class="command-card"><summary><code>ls</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Lista archivos y carpetas. Misiones 1 y 2.</p><span class="command-example">ls -la</span></div></details>
+          <details class="command-card"><summary><code>cd</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Cambia a otra carpeta. Misión 2.</p><span class="command-example">cd retos</span></div></details>
+          <details class="command-card"><summary><code>cat</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Muestra el contenido de un archivo. Misiones 3 y 4.</p><span class="command-example">cat bienvenida.txt</span></div></details>
+          <details class="command-card"><summary><code>find</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Busca archivos o carpetas por nombre y otras condiciones. Misión 4.</p><span class="command-example">find / -name &quot;clave.txt&quot;</span></div></details>
+          <details class="command-card"><summary><code>su</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Cambia al usuario indicado. La terminal pide su contraseña.</p><span class="command-example">su aprendiz2</span></div></details>
+          <details class="command-card"><summary><code>sed</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Filtra o transforma texto; por ejemplo, muestra una línea concreta. Misión 5.</p><span class="command-example">sed -n '2p' apuntes/registro.txt</span></div></details>
+          <details class="command-card"><summary><code>grep</code><span class="command-chevron" aria-hidden="true"></span></summary><div class="command-content"><p>Busca palabras o patrones dentro del contenido de archivos. Misión 6.</p><span class="command-example">grep &quot;CLAVE&quot; logs/accesos.log</span></div></details>
         </div>
       </section>
 
@@ -209,20 +216,20 @@
     </main>
     <script>
       (() => {
-        const userHomes = { alumno: "/home/alumno", aprendiz2: "/home/aprendiz2" };
+        const userHomes = { user: "/home/user", aprendiz2: "/home/aprendiz2" };
         const passwords = { aprendiz2: "LINUX-02" };
         const files = {
-          "/home/alumno/bienvenida.txt": "Bienvenido al laboratorio.\nEn la misión 2 entra en retos. Allí encontrarás el archivo que te dará acceso al siguiente usuario.",
-          "/home/alumno/retos/archivo-antiguo/nota.txt": "Busca el archivo clave.txt y lee su contenido para conseguir la contraseña de aprendiz2.",
-          "/home/alumno/retos/archivo-antiguo/clave.txt": "Usuario siguiente: aprendiz2\nContraseña: LINUX-02",
+          "/home/user/bienvenida.txt": "Bienvenido al laboratorio.\nEn la misión 2 entra en retos. Allí encontrarás el archivo que te dará acceso al siguiente usuario.",
+          "/home/user/retos/archivo-antiguo/nota.txt": "Busca el archivo clave.txt y lee su contenido para conseguir la contraseña de aprendiz2.",
+          "/home/user/retos/archivo-antiguo/clave.txt": "Usuario siguiente: aprendiz2\nContraseña: LINUX-02",
           "/home/aprendiz2/apuntes/registro.txt": "Registro de prácticas\nCLAVE: LINUX-03",
           "/home/aprendiz2/logs/accesos.log": "08:14 usuario invitado\n08:19 sesión cerrada\n08:23 CLAVE FINAL: LINUX-04"
         };
         const directories = new Set([
-          "/", "/home", userHomes.alumno, `${userHomes.alumno}/retos`, `${userHomes.alumno}/retos/archivo-antiguo`,
+          "/", "/home", userHomes.user, `${userHomes.user}/retos`, `${userHomes.user}/retos/archivo-antiguo`,
           userHomes.aprendiz2, `${userHomes.aprendiz2}/apuntes`, `${userHomes.aprendiz2}/logs`
         ]);
-        let currentUser = "alumno";
+        let currentUser = "user";
         let current = userHomes[currentUser];
         let activeMission = 0;
         let pendingSu = null;
@@ -246,7 +253,7 @@
           { badge: "Misión 02 · Primer recorrido", title: "Entra en retos", description: "Abre la carpeta retos y lista su contenido. Así practicas cambiar de directorio y explorar lo que contiene.", hint: "Prueba cd retos y luego ls. Para volver atrás, puedes usar cd .. ." },
           { badge: "Misión 03 · Leer instrucciones", title: "Abre el mensaje", description: "Lee el archivo bienvenida.txt para descubrir qué tienes que hacer a continuación.", hint: "El comando cat muestra el contenido de un archivo: cat bienvenida.txt." },
           { badge: "Misión 04 · Buscar y leer", title: "Encuentra la contraseña", description: "Busca clave.txt en el sistema y lee el archivo. Necesitarás la contraseña para cambiar al siguiente usuario.", hint: "Usa find / -name \"clave.txt\". Después, abre la ruta que aparezca con cat." },
-          { badge: "Misión 05 · Cambiar de usuario", title: "Entra como aprendiz2", description: "Cambia del usuario alumno a aprendiz2 con su. La contraseña apareció en la misión anterior.", hint: "Escribe su aprendiz2. Cuando aparezca la petición de contraseña, introdúcela y pulsa Ejecutar." },
+          { badge: "Misión 05 · Cambiar de usuario", title: "Entra como aprendiz2", description: "Cambia del usuario user a aprendiz2 con su. La contraseña apareció en la misión anterior.", hint: "Escribe su aprendiz2. Cuando aparezca la petición de contraseña, introdúcela y pulsa Ejecutar." },
           { badge: "Misión 06 · Leer registros", title: "Busca las claves", description: "Como aprendiz2, examina los registros para encontrar la clave final. Aquí practicarás sed y grep.", hint: "La segunda línea de apuntes/registro.txt contiene una clave. Después, filtra accesos.log con grep." }
         ];
 
@@ -271,6 +278,17 @@
           const line = document.createElement("p");
           line.className = `terminal-line ${kind}`.trim();
           line.textContent = text;
+          output.append(line);
+          output.scrollTop = output.scrollHeight;
+        }
+
+        function printCommand(command) {
+          const line = document.createElement("p");
+          line.className = "terminal-line";
+          const commandPrompt = document.createElement("span");
+          commandPrompt.className = "prompt";
+          commandPrompt.textContent = prompt.textContent;
+          line.append(commandPrompt, document.createTextNode(` ${command}`));
           output.append(line);
           output.scrollTop = output.scrollHeight;
         }
@@ -336,7 +354,7 @@
             return;
           }
 
-          print(`${currentUser}:${current === userHomes[currentUser] ? "~" : current.replace(userHomes[currentUser], "~")}$ ${command}`);
+          printCommand(command);
           if (command === "clear") { output.replaceChildren(); return; }
           const args = command.match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g) || [];
           const name = args.shift();
@@ -352,14 +370,14 @@
             if (!directories.has(destination)) result = `cd: no existe el directorio: ${args[0] || "~"}`;
             else {
               current = destination;
-              if (activeMission === 1 && current === `${userHomes.alumno}/retos`) enteredRetos = true;
+              if (activeMission === 1 && current === `${userHomes.user}/retos`) enteredRetos = true;
               updatePrompt();
             }
           } else if (name === "cat") {
             const target = pathOf(unquote(args[0] || ""));
             result = files[target] ?? `cat: no existe el archivo: ${args[0] || "(falta nombre)"}`;
-            if (activeMission === 2 && target === `${userHomes.alumno}/bienvenida.txt`) finishMission();
-            if (activeMission === 3 && foundKey && target === `${userHomes.alumno}/retos/archivo-antiguo/clave.txt` && result.includes("LINUX-02")) finishMission();
+            if (activeMission === 2 && target === `${userHomes.user}/bienvenida.txt`) finishMission();
+            if (activeMission === 3 && foundKey && target === `${userHomes.user}/retos/archivo-antiguo/clave.txt` && result.includes("LINUX-02")) finishMission();
           } else if (name === "find") {
             const rootArg = args[0] && !args[0].startsWith("-") ? args.shift() : ".";
             const root = pathOf(rootArg);
@@ -371,7 +389,7 @@
               const matcher = new RegExp(`^${pattern.split("*").map(part => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join(".*")}$`);
               const matches = Object.keys(files).filter(file => (root === "/" ? file.startsWith("/") : file === root || file.startsWith(`${root}/`)) && matcher.test(file.split("/").pop()));
               result = matches.length ? matches.join("\n") : "No se encontraron coincidencias.";
-              if (activeMission === 3 && matches.includes(`${userHomes.alumno}/retos/archivo-antiguo/clave.txt`)) foundKey = true;
+              if (activeMission === 3 && matches.includes(`${userHomes.user}/retos/archivo-antiguo/clave.txt`)) foundKey = true;
             }
           } else if (name === "su") {
             const targetUser = args[0];
@@ -425,7 +443,7 @@
         missionButtons.forEach(button => button.addEventListener("click", () => {
           if (button.disabled) return;
           activeMission = Number(button.dataset.mission);
-          currentUser = activeMission >= 5 && completed.has("nivel-4") ? "aprendiz2" : "alumno";
+          currentUser = activeMission >= 5 && completed.has("nivel-4") ? "aprendiz2" : "user";
           current = userHomes[currentUser];
           pendingSu = null;
           input.type = "text";
