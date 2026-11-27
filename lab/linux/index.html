@@ -5,34 +5,450 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#050807">
     <title>Linux · Charyster Lab</title>
-    <meta name="description" content="Recursos y pruebas Linux de Charyster Lab.">
+    <meta name="description" content="Herramientas, juegos y comandos Linux para aprender practicando en Charyster Lab.">
     <style>
-      :root { color-scheme:dark; --bg:#050807; --text:#f4f7f5; --muted:#98a49d; --green:#32ef6d; }
-      * { box-sizing:border-box; }
-      body { margin:0; min-height:100vh; background:radial-gradient(circle at 18% 8%,rgba(28,139,61,.17),transparent 30rem),var(--bg); color:var(--text); font:16px/1.6 Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
-      .shell { width:min(100% - 40px,1000px); margin:auto; }
-      header { padding:20px 0; border-bottom:1px solid #ffffff12; }
-      header a, .back { color:var(--green); text-decoration:none; font-weight:700; }
-      main { padding:clamp(70px,12vw,140px) 0; }
-      .eyebrow { color:var(--green); font-size:11px; font-weight:800; letter-spacing:.18em; text-transform:uppercase; }
-      h1 { margin:14px 0; font-size:clamp(3rem,9vw,6rem); line-height:.95; letter-spacing:-.07em; }
-      p { max-width:650px; color:var(--muted); }
-      .status { display:inline-flex; align-items:center; gap:9px; margin:18px 0; padding:8px 12px; border:1px solid #ffbd4a44; border-radius:999px; color:#f2ce86; font-size:11px; font-weight:750; text-transform:uppercase; letter-spacing:.08em; }
-      .status::before { content:""; width:7px; height:7px; border-radius:50%; background:#ffbd4a; }
-      .note { margin-top:38px; padding:20px; border:1px solid #ffffff12; border-radius:14px; background:#ffffff05; }
-      .note p { margin:0; font-size:14px; }
-      .back { display:inline-block; margin-top:28px; }
+      :root {
+        color-scheme: dark;
+        --bg: #050807;
+        --surface: #0b110e;
+        --surface-raised: #101813;
+        --line: rgba(123, 255, 151, .16);
+        --text: #f4f7f5;
+        --muted: #a3afa7;
+        --green: #32ef6d;
+        --amber: #ffcb72;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at 18% 5%, rgba(28,139,61,.17), transparent 31rem), var(--bg);
+        color: var(--text);
+        font: 16px/1.6 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      a { color: var(--green); }
+      .shell { width: min(100% - 40px, 1060px); margin-inline: auto; }
+      header { border-bottom: 1px solid rgba(255,255,255,.07); }
+      .topbar { min-height: 72px; display: flex; align-items: center; }
+      .back { color: var(--green); font-weight: 700; text-decoration: none; }
+      main { padding: clamp(42px, 7vw, 76px) 0 90px; }
+      .eyebrow { color: var(--green); font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+      h1 { margin: 10px 0 14px; font-size: clamp(3rem, 9vw, 5.6rem); line-height: .98; letter-spacing: -.075em; }
+      h2 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.1; letter-spacing: -.045em; }
+      h3 { margin: 0; font-size: 1.15rem; line-height: 1.25; }
+      p { color: var(--muted); }
+      .intro { max-width: 720px; margin-bottom: 30px; }
+      .intro p { max-width: 650px; margin: 0; font-size: 17px; }
+      .section-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0 66px; }
+      .nav-card {
+        min-height: 82px; display: flex; align-items: center; gap: 14px; padding: 15px 18px;
+        border: 1px solid var(--line); border-radius: 14px; background: rgba(11,19,15,.82);
+        color: var(--text); text-decoration: none; font-weight: 750;
+        transition: border-color 150ms ease, transform 150ms ease, background 150ms ease;
+      }
+      .nav-card:hover { transform: translateY(-2px); border-color: rgba(50,239,109,.55); background: var(--surface-raised); }
+      .nav-icon { width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 12px; background: rgba(50,239,109,.09); color: var(--green); font-size: 20px; }
+      .nav-card small { display: block; margin-top: 1px; color: var(--muted); font-size: 13px; font-weight: 500; }
+      .content-section { scroll-margin-top: 28px; margin-top: 68px; }
+      .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 22px; }
+      .section-head p { max-width: 480px; margin: 0; }
+      .card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .card { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(145deg, rgba(14,24,18,.9), rgba(7,11,9,.94)); }
+      .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
+      .card p { margin: 9px 0 0; }
+      .tag { display: inline-flex; align-items: center; border: 1px solid rgba(255,203,114,.3); border-radius: 999px; padding: 5px 9px; color: var(--amber); font-size: 12px; font-weight: 700; white-space: nowrap; }
+      .tag.green { border-color: rgba(50,239,109,.28); color: var(--green); }
+      .safety-note { margin-top: 14px; padding: 14px 16px; border-left: 3px solid var(--amber); border-radius: 0 10px 10px 0; background: rgba(255,203,114,.06); color: #d4c6a8; }
+      .game-layout { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 18px; align-items: start; }
+      .mission { padding: 22px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+      .mission-select { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+      .mission-select button { border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; background: #080d0a; color: var(--muted); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+      .mission-select button[aria-current="step"] { border-color: rgba(50,239,109,.55); background: rgba(50,239,109,.1); color: var(--green); }
+      .mission-select button:disabled { opacity: .45; cursor: not-allowed; }
+      .mission p { margin-bottom: 0; }
+      .hint { margin-top: 18px; padding: 14px; border-radius: 10px; background: rgba(50,239,109,.055); color: var(--muted); font-size: 14px; }
+      .terminal { overflow: hidden; border: 1px solid rgba(123,255,151,.23); border-radius: 15px; background: #070b09; box-shadow: 0 24px 65px rgba(0,0,0,.23); }
+      .terminal-bar { min-height: 42px; display: flex; align-items: center; gap: 7px; padding: 0 14px; border-bottom: 1px solid rgba(255,255,255,.08); background: #0d130f; color: var(--muted); font: 13px var(--mono); }
+      .terminal-dot { width: 9px; height: 9px; border-radius: 50%; background: #ff6e68; }
+      .terminal-dot:nth-child(2) { background: #ffc45e; }
+      .terminal-dot:nth-child(3) { background: var(--green); margin-right: 7px; }
+      .terminal-output { height: 238px; overflow: auto; padding: 15px 17px; color: #d7e3da; font: 14px/1.65 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+      .terminal-line { margin: 0 0 5px; }
+      .terminal-line.system { color: #9ba99f; }
+      .terminal-line.success { color: var(--green); }
+      .terminal-line.error { color: #ffad9e; }
+      .terminal-form { display: flex; align-items: center; gap: 8px; padding: 12px 15px; border-top: 1px solid rgba(255,255,255,.08); }
+      .prompt { color: var(--green); font: 14px var(--mono); white-space: nowrap; }
+      .terminal-input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--text); font: 14px var(--mono); }
+      .terminal-form button { border: 1px solid rgba(50,239,109,.35); border-radius: 8px; padding: 8px 12px; background: rgba(50,239,109,.1); color: var(--green); font: 700 13px inherit; cursor: pointer; }
+      .terminal-form button:hover { background: rgba(50,239,109,.18); }
+      .command-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      .command-card { padding: 17px; border: 1px solid var(--line); border-radius: 13px; background: var(--surface); }
+      code, .command-example { color: var(--green); font-family: var(--mono); }
+      .command-card code { font-size: 16px; font-weight: 750; }
+      .command-card p { margin: 8px 0 0; font-size: 14px; }
+      .command-example { display: inline-block; margin-top: 10px; border-radius: 6px; padding: 5px 7px; background: #050907; font-size: 12px; }
+      footer { margin-top: 76px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.07); color: #9ba69f; font-size: 14px; }
+      footer a { text-decoration: none; }
+      @media (max-width: 760px) {
+        .section-nav { grid-template-columns: 1fr; margin-bottom: 48px; }
+        .nav-card { min-height: 68px; }
+        .section-head { align-items: flex-start; flex-direction: column; gap: 9px; }
+        .game-layout { grid-template-columns: 1fr; }
+        .command-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 520px) {
+        .shell { width: min(100% - 30px, 1060px); }
+        main { padding-top: 38px; }
+        .card-grid, .command-grid { grid-template-columns: 1fr; }
+        .card { padding: 18px; }
+        .card-top { flex-wrap: wrap; }
+        .terminal-output { height: 220px; font-size: 13px; }
+        .terminal-form { padding-inline: 11px; }
+        .terminal-form button { padding: 8px 9px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .nav-card { transition: none; }
+      }
     </style>
   </head>
   <body>
-    <header><div class="shell"><a href="../index.html">← Volver al Lab</a></div></header>
+    <header>
+      <div class="shell topbar"><a class="back" href="../index.html">← Volver al Lab</a></div>
+    </header>
     <main class="shell">
-      <span class="eyebrow">Charyster · Lab · Sistemas</span>
-      <h1>Linux</h1>
-      <span class="status">En construcción</span>
-      <p>Estamos preparando esta sección con guías, utilidades y pruebas de distintas distribuciones Linux.</p>
-      <div class="note"><p>Próximamente añadiremos aquí el contenido y las herramientas de este espacio.</p></div>
-      <a class="back" href="../index.html">Volver a todas las herramientas</a>
+      <section class="intro" aria-labelledby="page-title">
+        <span class="eyebrow">Charyster · Lab · Sistemas</span>
+        <h1 id="page-title">Linux</h1>
+        <p>Aprende Linux practicando: explora herramientas, resuelve misiones y consulta los comandos que vas descubriendo.</p>
+      </section>
+
+      <nav class="section-nav" aria-label="Secciones de Linux">
+        <a class="nav-card" href="#herramientas"><span class="nav-icon" aria-hidden="true">⚙</span><span>Herramientas<small>Utilidades de Kali Linux</small></span></a>
+        <a class="nav-card" href="#juegos"><span class="nav-icon" aria-hidden="true">⌘</span><span>Juegos<small>Misiones para aprender</small></span></a>
+        <a class="nav-card" href="#comandos"><span class="nav-icon" aria-hidden="true">&gt;_</span><span>Comandos<small>Guía rápida de terminal</small></span></a>
+      </nav>
+
+      <section class="content-section" id="herramientas" aria-labelledby="tools-title">
+        <div class="section-head">
+          <div><span class="eyebrow">Práctica responsable</span><h2 id="tools-title">Herramientas</h2></div>
+          <p>Fichas de herramientas que iremos probando en Kali Linux, con sus usos, requisitos y notas de práctica.</p>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-top"><h3>Airgeddon</h3><span class="tag">Ficha pendiente</span></div>
+            <p>Suite de auditoría inalámbrica. Aquí añadiremos instalación, requisitos, pruebas realizadas y lo aprendido.</p>
+            <span class="tag green">Redes Wi-Fi</span>
+          </article>
+          <article class="card">
+            <div class="card-top"><h3>Próxima herramienta</h3><span class="tag">Por probar</span></div>
+            <p>Reservado para otra utilidad de Kali Linux cuando la hayamos probado y podamos explicar su uso.</p>
+            <span class="tag green">Kali Linux</span>
+          </article>
+        </div>
+        <div class="safety-note">Practica las auditorías únicamente en equipos y redes propios o con autorización expresa.</div>
+      </section>
+
+      <section class="content-section" id="juegos" aria-labelledby="games-title">
+        <div class="section-head">
+          <div><span class="eyebrow">Juego de fundamentos · 6 misiones</span><h2 id="games-title">Aprende jugando</h2></div>
+            <p>Un recorrido paso a paso para aprender a orientarte, moverte entre carpetas, leer archivos y cambiar de usuario. Completa cada misión para desbloquear la siguiente.</p>
+        </div>
+        <div class="game-layout">
+          <article class="mission">
+            <div class="mission-select" aria-label="Misiones">
+              <button type="button" data-mission="0" aria-current="step">Misión 1</button>
+              <button type="button" data-mission="1" disabled>Misión 2 · Bloqueada</button>
+              <button type="button" data-mission="2" disabled>Misión 3 · Bloqueada</button>
+              <button type="button" data-mission="3" disabled>Misión 4 · Bloqueada</button>
+              <button type="button" data-mission="4" disabled>Misión 5 · Bloqueada</button>
+              <button type="button" data-mission="5" disabled>Misión 6 · Bloqueada</button>
+            </div>
+            <span class="tag green" id="mission-badge">Misión 01 · Reconocimiento</span>
+            <h3 id="mission-title" style="margin-top:16px">¿Dónde estoy?</h3>
+            <p id="mission-description">El usuario anterior dejó una pista en su carpeta de retos. Explora el sistema y localiza el archivo <code>clave.txt</code>. Cuando lo encuentres, lee su contenido.</p>
+            <div class="hint" id="mission-hint"><strong>Pista:</strong> puedes empezar mirando dónde estás y qué archivos tienes. Si necesitas ayuda, escribe <code>help</code> en la terminal.</div>
+            <p id="mission-state" aria-live="polite" style="font-size:14px">Estado: misión sin completar.</p>
+          </article>
+          <div class="terminal" aria-label="Terminal simulada de la misión">
+            <div class="terminal-bar"><span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span> terminal-charyster</div>
+            <div class="terminal-output" id="terminal-output" role="log" aria-live="polite" aria-label="Salida de la terminal"></div>
+            <form class="terminal-form" id="terminal-form">
+              <label class="prompt" for="terminal-input" id="terminal-prompt">alumno:~$</label>
+              <input class="terminal-input" id="terminal-input" name="command" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Escribe un comando Linux">
+              <button type="submit">Ejecutar</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="comandos" aria-labelledby="commands-title">
+        <div class="section-head">
+          <div><span class="eyebrow">Lo que aprenderás</span><h2 id="commands-title">Comandos</h2></div>
+          <p>La guía crecerá con cada juego: explicación sencilla, ejemplo y enlace a la misión donde se usa.</p>
+        </div>
+        <div class="command-grid">
+          <article class="command-card"><code>pwd</code><p>Muestra la carpeta en la que estás. Misión 1.</p><span class="command-example">pwd</span></article>
+          <article class="command-card"><code>whoami</code><p>Indica con qué usuario estás trabajando.</p><span class="command-example">whoami</span></article>
+          <article class="command-card"><code>ls</code><p>Lista archivos y carpetas. Misiones 1 y 2.</p><span class="command-example">ls -la</span></article>
+          <article class="command-card"><code>cd</code><p>Cambia a otra carpeta. Misión 2.</p><span class="command-example">cd retos</span></article>
+          <article class="command-card"><code>cat</code><p>Muestra el contenido de un archivo. Misiones 3 y 4.</p><span class="command-example">cat bienvenida.txt</span></article>
+          <article class="command-card"><code>find</code><p>Busca archivos o carpetas por nombre y otras condiciones. Misión 4.</p><span class="command-example">find / -name "clave.txt"</span></article>
+          <article class="command-card"><code>su</code><p>Cambia al usuario indicado. La terminal pide su contraseña.</p><span class="command-example">su aprendiz2</span></article>
+          <article class="command-card"><code>sed</code><p>Filtra o transforma texto; por ejemplo, muestra una línea concreta. Misión 5.</p><span class="command-example">sed -n '2p' apuntes/registro.txt</span></article>
+          <article class="command-card"><code>grep</code><p>Busca palabras o patrones dentro del contenido de archivos. Misión 6.</p><span class="command-example">grep "CLAVE" logs/accesos.log</span></article>
+        </div>
+      </section>
+
+      <footer><a href="../index.html">← Volver a todas las herramientas del Lab</a></footer>
     </main>
+    <script>
+      (() => {
+        const userHomes = { alumno: "/home/alumno", aprendiz2: "/home/aprendiz2" };
+        const passwords = { aprendiz2: "LINUX-02" };
+        const files = {
+          "/home/alumno/bienvenida.txt": "Bienvenido al laboratorio.\nEn la misión 2 entra en retos. Allí encontrarás el archivo que te dará acceso al siguiente usuario.",
+          "/home/alumno/retos/archivo-antiguo/nota.txt": "Busca el archivo clave.txt y lee su contenido para conseguir la contraseña de aprendiz2.",
+          "/home/alumno/retos/archivo-antiguo/clave.txt": "Usuario siguiente: aprendiz2\nContraseña: LINUX-02",
+          "/home/aprendiz2/apuntes/registro.txt": "Registro de prácticas\nCLAVE: LINUX-03",
+          "/home/aprendiz2/logs/accesos.log": "08:14 usuario invitado\n08:19 sesión cerrada\n08:23 CLAVE FINAL: LINUX-04"
+        };
+        const directories = new Set([
+          "/", "/home", userHomes.alumno, `${userHomes.alumno}/retos`, `${userHomes.alumno}/retos/archivo-antiguo`,
+          userHomes.aprendiz2, `${userHomes.aprendiz2}/apuntes`, `${userHomes.aprendiz2}/logs`
+        ]);
+        let currentUser = "alumno";
+        let current = userHomes[currentUser];
+        let activeMission = 0;
+        let pendingSu = null;
+        let foundKey = false;
+        let enteredRetos = false;
+        let readSedHint = false;
+        const usedCommands = new Set();
+        const output = document.getElementById("terminal-output");
+        const form = document.getElementById("terminal-form");
+        const input = document.getElementById("terminal-input");
+        const prompt = document.getElementById("terminal-prompt");
+        const state = document.getElementById("mission-state");
+        const completed = new Set();
+        const missionButtons = [...document.querySelectorAll("[data-mission]")];
+        const missionBadge = document.getElementById("mission-badge");
+        const missionTitle = document.getElementById("mission-title");
+        const missionDescription = document.getElementById("mission-description");
+        const missionHint = document.getElementById("mission-hint");
+        const missions = [
+          { badge: "Misión 01 · Reconocimiento", title: "¿Dónde estoy?", description: "Familiarízate con la terminal. Comprueba tu ubicación, tu usuario y qué archivos tienes usando pwd, whoami y ls.", hint: "Prueba pwd, whoami y ls; puedes ejecutarlos en el orden que quieras." },
+          { badge: "Misión 02 · Primer recorrido", title: "Entra en retos", description: "Abre la carpeta retos y lista su contenido. Así practicas cambiar de directorio y explorar lo que contiene.", hint: "Prueba cd retos y luego ls. Para volver atrás, puedes usar cd .. ." },
+          { badge: "Misión 03 · Leer instrucciones", title: "Abre el mensaje", description: "Lee el archivo bienvenida.txt para descubrir qué tienes que hacer a continuación.", hint: "El comando cat muestra el contenido de un archivo: cat bienvenida.txt." },
+          { badge: "Misión 04 · Buscar y leer", title: "Encuentra la contraseña", description: "Busca clave.txt en el sistema y lee el archivo. Necesitarás la contraseña para cambiar al siguiente usuario.", hint: "Usa find / -name \"clave.txt\". Después, abre la ruta que aparezca con cat." },
+          { badge: "Misión 05 · Cambiar de usuario", title: "Entra como aprendiz2", description: "Cambia del usuario alumno a aprendiz2 con su. La contraseña apareció en la misión anterior.", hint: "Escribe su aprendiz2. Cuando aparezca la petición de contraseña, introdúcela y pulsa Ejecutar." },
+          { badge: "Misión 06 · Leer registros", title: "Busca las claves", description: "Como aprendiz2, examina los registros para encontrar la clave final. Aquí practicarás sed y grep.", hint: "La segunda línea de apuntes/registro.txt contiene una clave. Después, filtra accesos.log con grep." }
+        ];
+
+        function pathOf(path) {
+          const parts = (path.startsWith("/") ? path : `${current}/${path}`).split("/");
+          const clean = [];
+          for (const part of parts) {
+            if (!part || part === ".") continue;
+            if (part === "..") clean.pop();
+            else clean.push(part);
+          }
+          return `/${clean.join("/")}`;
+        }
+
+        function updatePrompt() {
+          const home = userHomes[currentUser];
+          const location = current === home ? "~" : current.startsWith(`${home}/`) ? `~${current.slice(home.length)}` : current;
+          prompt.textContent = `${currentUser}:${location}$`;
+        }
+
+        function print(text, kind = "") {
+          const line = document.createElement("p");
+          line.className = `terminal-line ${kind}`.trim();
+          line.textContent = text;
+          output.append(line);
+          output.scrollTop = output.scrollHeight;
+        }
+
+        function updateMissions() {
+          const mission = missions[activeMission];
+          missionBadge.textContent = mission.badge;
+          missionTitle.textContent = mission.title;
+          missionDescription.textContent = mission.description;
+          missionHint.replaceChildren();
+          const strong = document.createElement("strong");
+          strong.textContent = "Pista: ";
+          missionHint.append(strong, document.createTextNode(mission.hint));
+          missionButtons.forEach((button, index) => {
+            const unlocked = index === 0 || completed.has(`nivel-${index}`);
+            button.disabled = !unlocked;
+            button.textContent = completed.has(`nivel-${index + 1}`) ? `Misión ${index + 1} · ✓` : `Misión ${index + 1}${unlocked ? "" : " · Bloqueada"}`;
+            if (index === activeMission) button.setAttribute("aria-current", "step");
+            else button.removeAttribute("aria-current");
+          });
+          const isComplete = completed.has(`nivel-${activeMission + 1}`);
+          state.textContent = isComplete ? "Estado: misión completada. ¡Buen trabajo!" : `Estado: misión ${activeMission + 1} de ${missions.length} sin completar.`;
+          state.style.color = isComplete ? "var(--green)" : "";
+          updatePrompt();
+        }
+
+        function finishMission() {
+          const key = `nivel-${activeMission + 1}`;
+          if (completed.has(key)) return;
+          completed.add(key);
+          print(`¡Misión ${activeMission + 1} completada! Has desbloqueado el siguiente paso.`, "success");
+          updateMissions();
+        }
+
+        function list(path, showHidden) {
+          const target = pathOf(path || ".");
+          if (!directories.has(target)) return `ls: no existe el directorio: ${path || "."}`;
+          const prefix = target === "/" ? "/" : `${target}/`;
+          const children = new Set();
+          for (const entry of [...directories, ...Object.keys(files)]) {
+            if (!entry.startsWith(prefix) || entry === target) continue;
+            const rest = entry.slice(prefix.length);
+            if (!rest.includes("/")) children.add(rest);
+          }
+          const visible = [...children].filter(name => showHidden || !name.startsWith("."));
+          return visible.length ? visible.sort().join("  ") : "(carpeta vacía)";
+        }
+
+        function execute(raw) {
+          const command = raw.trim();
+          if (!command) return;
+          if (pendingSu) {
+            const targetUser = pendingSu;
+            pendingSu = null;
+            if (command === passwords[targetUser]) {
+              currentUser = targetUser;
+              current = userHomes[currentUser];
+              print(`Sesión cambiada. Ahora eres ${currentUser}.`, "success");
+              if (activeMission === 4) finishMission();
+            } else print("su: contraseña incorrecta", "error");
+            input.type = "text";
+            updatePrompt();
+            return;
+          }
+
+          print(`${currentUser}:${current === userHomes[currentUser] ? "~" : current.replace(userHomes[currentUser], "~")}$ ${command}`);
+          if (command === "clear") { output.replaceChildren(); return; }
+          const args = command.match(/(?:[^\s"']+|"[^"]*"|'[^']*')+/g) || [];
+          const name = args.shift();
+          const unquote = value => value?.replace(/^("|')(.*)\1$/, "$2");
+          let result = "";
+
+          if (name === "help") result = "Comandos: whoami, pwd, ls [-la], cd <carpeta>, cat <archivo>, find <ruta> -name <patrón>, su <usuario>, sed -n 'Np' <archivo>, grep <texto> <archivo>, clear";
+          else if (name === "whoami") result = currentUser;
+          else if (name === "pwd") result = current;
+          else if (name === "ls") result = list(args.filter(arg => !arg.startsWith("-"))[0], args.some(arg => arg.includes("a")));
+          else if (name === "cd") {
+            const destination = pathOf(args[0] || userHomes[currentUser]);
+            if (!directories.has(destination)) result = `cd: no existe el directorio: ${args[0] || "~"}`;
+            else {
+              current = destination;
+              if (activeMission === 1 && current === `${userHomes.alumno}/retos`) enteredRetos = true;
+              updatePrompt();
+            }
+          } else if (name === "cat") {
+            const target = pathOf(unquote(args[0] || ""));
+            result = files[target] ?? `cat: no existe el archivo: ${args[0] || "(falta nombre)"}`;
+            if (activeMission === 2 && target === `${userHomes.alumno}/bienvenida.txt`) finishMission();
+            if (activeMission === 3 && foundKey && target === `${userHomes.alumno}/retos/archivo-antiguo/clave.txt` && result.includes("LINUX-02")) finishMission();
+          } else if (name === "find") {
+            const rootArg = args[0] && !args[0].startsWith("-") ? args.shift() : ".";
+            const root = pathOf(rootArg);
+            const nameAt = args.indexOf("-name");
+            if (nameAt < 0 || !args[nameAt + 1]) result = "Uso: find <ruta> -name <patrón>";
+            else if (!directories.has(root) && !files[root]) result = `find: no existe la ruta: ${rootArg}`;
+            else {
+              const pattern = unquote(args[nameAt + 1]);
+              const matcher = new RegExp(`^${pattern.split("*").map(part => part.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join(".*")}$`);
+              const matches = Object.keys(files).filter(file => (root === "/" ? file.startsWith("/") : file === root || file.startsWith(`${root}/`)) && matcher.test(file.split("/").pop()));
+              result = matches.length ? matches.join("\n") : "No se encontraron coincidencias.";
+              if (activeMission === 3 && matches.includes(`${userHomes.alumno}/retos/archivo-antiguo/clave.txt`)) foundKey = true;
+            }
+          } else if (name === "su") {
+            const targetUser = args[0];
+            if (!targetUser || !userHomes[targetUser]) result = `su: usuario desconocido: ${targetUser || "(falta nombre)"}`;
+            else if (targetUser === currentUser) result = `Ya estás usando el usuario ${currentUser}.`;
+            else {
+              pendingSu = targetUser;
+              input.type = "password";
+              print(`Contraseña de ${targetUser}:`, "system");
+            }
+          } else if (name === "sed") {
+            const selector = args[1] || "";
+            const match = selector.match(/^'?(\d+)p'?$/);
+            if (args[0] !== "-n" || !match || !args[2]) result = "Uso en este laboratorio: sed -n '2p' archivo.txt";
+            else {
+              const content = files[pathOf(unquote(args[2]))];
+              result = content === undefined ? `sed: no existe el archivo: ${args[2]}` : content.split("\n")[Number(match[1]) - 1] || "";
+              if (activeMission === 5 && result.includes("LINUX-03")) {
+                readSedHint = true;
+                print("Clave encontrada. Ahora busca la clave final con grep.", "success");
+              }
+            }
+          } else if (name === "grep") {
+            const query = unquote(args[0] || "");
+            const target = args[1] ? pathOf(unquote(args[1])) : "";
+            if (!query || !target) result = "Uso: grep <texto> <archivo>";
+            else {
+              const content = files[target];
+              if (content === undefined) result = `grep: no existe el archivo: ${args[1]}`;
+              else {
+                const matches = content.split("\n").filter(line => line.toLowerCase().includes(query.toLowerCase()));
+                result = matches.length ? matches.join("\n") : "No se encontraron coincidencias.";
+                if (activeMission === 5 && result.includes("LINUX-04")) {
+                  if (readSedHint) finishMission();
+                  else print("Antes de completar la misión, consulta también la segunda línea con sed.", "system");
+                }
+              }
+            }
+          } else result = `${name}: comando no disponible en esta terminal de aprendizaje. Escribe help para ver los permitidos.`;
+
+          if (result) {
+            print(result, result.startsWith("No se") || /^(cat|find|cd|grep|sed|su):/.test(result) ? "error" : "system");
+            if (activeMission === 0) {
+              usedCommands.add(name);
+              if (usedCommands.has("pwd") && usedCommands.has("whoami") && usedCommands.has("ls")) finishMission();
+            }
+            if (activeMission === 1 && enteredRetos && name === "ls") finishMission();
+          }
+        }
+
+        missionButtons.forEach(button => button.addEventListener("click", () => {
+          if (button.disabled) return;
+          activeMission = Number(button.dataset.mission);
+          currentUser = activeMission >= 5 && completed.has("nivel-4") ? "aprendiz2" : "alumno";
+          current = userHomes[currentUser];
+          pendingSu = null;
+          input.type = "text";
+          foundKey = false;
+          enteredRetos = false;
+          readSedHint = false;
+          usedCommands.clear();
+          updateMissions();
+          output.replaceChildren();
+          print(`Charyster Linux Lab · Misión ${String(activeMission + 1).padStart(2, "0")}`, "success");
+          print("Terminal simulada. Escribe help para consultar los comandos permitidos.", "system");
+          input.focus();
+        }));
+
+        print("Charyster Linux Lab · Juego de fundamentos", "success");
+        print("Esta terminal es una simulación: solo acepta los comandos del laboratorio.", "system");
+        print("Empieza con pwd y ls. Escribe help para ver la lista.", "system");
+        updateMissions();
+        form.addEventListener("submit", event => {
+          event.preventDefault();
+          execute(input.value);
+          input.value = "";
+          input.focus();
+        });
+      })();
+    </script>
   </body>
 </html>
